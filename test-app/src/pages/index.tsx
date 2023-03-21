@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
 import Device, { DeviceProps } from '../components/Device'
 import prisma from '../lib/prisma'
+import { TableHeader } from '@/components/DeviceHeader'
 
 // localhost:3000 (main page)
-
 type Props = {
   devices: DeviceProps[]
 }
 
+// Returns the table
 const devicesTable = (props: Props) => {
   if (!props.devices) {
     console.log(props)
@@ -21,29 +22,11 @@ const devicesTable = (props: Props) => {
   } else {
     return (
       <table>
-        {tableHead()}
+        <TableHeader />
         {tableBody(props)}
       </table>
     )
   }
-}
-
-// Table header
-const tableHead = () => {
-  return (
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Make</th>
-        <th>Model</th>
-        <th>Chipset</th>
-        <th>Status</th>
-        <th>Availabilty</th>
-        <th>Location</th>
-        <th>Farm ID</th>
-      </tr>
-    </thead>
-  )
 }
 
 // Returns list of devices in rows <tr><td>
@@ -53,8 +36,8 @@ const tableBody = (props: Props) => {
       props.devices.map((device) => {
         return (
           <Device
-            key = {device.id}
-            device = {device} 
+            key={device.id}
+            device={device}
           />
         )
       })
