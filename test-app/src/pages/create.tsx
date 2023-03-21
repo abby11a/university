@@ -3,20 +3,23 @@ import Layout from '../components/Layout'
 import Router from 'next/router'
 import styles from '@/styles/Draft.module.css'
 
-/* Create a Device page - localhost:3000/createDevices */
+/* Create a Device page - localhost:3000/create */
 
 const Draft: React.FC = () => {
-  const [Id, setId] = useState('')
-  const [Make, setMake] = useState('')
-  const [Model, setModel] = useState('')
-  const [Chipset, setChipset] = useState('')
-  const [Status, setStatus] = useState('')
+  const [id, setId] = useState('')
+  // const [updatedAt, setUpdatedAt] = useState(Date.now())
+  const [make, setMake] = useState('')
+  const [model, setModel] = useState('')
+  const [chipset, setChipset] = useState('')
+  const [status, setStatus] = useState('')
+  const [availability, setAvailability] = useState(false)
+  const [location, setLocation] = useState('')
 
   // refresh, fetch new data and navigate to '/'
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     try {
-      const body = { Id, Make, Model, Chipset, Status }
+      const body = { id, make, model, chipset, status, availability, location }
       await fetch(`/api/device`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -38,35 +41,41 @@ const Draft: React.FC = () => {
             onChange={(e) => setId(e.target.value)}
             placeholder="Id"
             type="text"
-            value={Id}
+            value={id}
           />
           <input
             onChange={(e) => setMake(e.target.value)}
             placeholder="Make"
             type="text"
-            value={Make}
+            value={make}
           />
           <textarea
             cols={50}
             onChange={(e) => setModel(e.target.value)}
             placeholder="Model"
             rows={8}
-            value={Model}
+            value={model}
           />
           <textarea
             onChange={(e) => setStatus(e.target.value)}
             placeholder="Status"
             rows={8}
-            value={Status}
+            value={status}
           />
           <textarea
             onChange={(e) => setChipset(e.target.value)}
             placeholder="Chipset"
             rows={8}
-            value={Chipset}
+            value={chipset}
+          />
+          <textarea
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Location"
+            rows={8}
+            value={location}
           />
           <input
-            disabled={!Id || !Make || !Model || !Status}
+            disabled={!id || !make || !model || !status}
             type="submit"
             value="Create"
           />

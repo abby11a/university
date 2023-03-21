@@ -7,8 +7,8 @@ import prisma from '../../lib/prisma'
 import styles from '@/styles/Post.module.css'
 import Device, { DeviceProps } from '@/components/Device'
 
-async function publish(id: string): Promise<void> {
-  await fetch(`/api/publish/${id}`, {
+async function edit(id: string): Promise<void> {
+  await fetch(`/api/edit/${id}`, {
     method: 'PUT',
   })
   await Router.push('/')
@@ -23,7 +23,7 @@ async function destroy(id: string): Promise<void> {
 }
 
 const Post: React.FC<DeviceProps> = (props) => {
-  let title = props.Id
+  let title = props.id
 
   return (
     <Layout>
@@ -31,11 +31,11 @@ const Post: React.FC<DeviceProps> = (props) => {
         <h2>{title}</h2>
         <Device device={props}/>
       
-          <button className={styles.button} onClick={() => publish(props.Id)}>
+          <button className={styles.button} onClick={() => edit(props.id)}>
             Publish
           </button>
         
-        <button className={styles.button} onClick={() => destroy(props.Id)}>
+        <button className={styles.button} onClick={() => destroy(props.id)}>
           Delete
         </button>
       </div>
@@ -44,13 +44,13 @@ const Post: React.FC<DeviceProps> = (props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const Id = (
+  const id = (
     Array.isArray(context.params?.id)
       ? context.params?.id[0]
       : context.params?.id
   )
   const device = await prisma.device.findUnique({
-    where: { Id }
+    where: { id }
   })
   return { props: { ...device } }
 }

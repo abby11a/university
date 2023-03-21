@@ -21,8 +21,8 @@ const Header: React.FC = () => {
         <Link href="/signup" legacyBehavior>
           <a data-active={isActive('/signup')}>Signup</a>
         </Link>
-        <Link href="/createDevice" legacyBehavior>
-          <a data-active={isActive('/createDevice')}>+ Create device</a>
+        <Link href="/create" legacyBehavior>
+          <a data-active={isActive('/create')}>+ Create device</a>
         </Link>
       </div>
     </nav>

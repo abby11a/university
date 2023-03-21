@@ -34,13 +34,14 @@ CREATE TABLE `Farm` (
 
 -- CreateTable
 CREATE TABLE `Device` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
-    `title` VARCHAR(191) NOT NULL,
-    `content` VARCHAR(191) NULL,
-    `published` BOOLEAN NOT NULL DEFAULT false,
-    `viewCount` INTEGER NOT NULL DEFAULT 0,
+    `id` VARCHAR(191) NOT NULL,
+    `updatedAt` DATETIME(3) NULL,
+    `make` VARCHAR(191) NOT NULL,
+    `model` VARCHAR(191) NOT NULL,
+    `chipset` VARCHAR(191) NULL,
+    `status` VARCHAR(191) NOT NULL,
+    `availability` BOOLEAN NOT NULL DEFAULT false,
+    `location` VARCHAR(191) NOT NULL,
     `farmId` INTEGER NULL,
 
     PRIMARY KEY (`id`)

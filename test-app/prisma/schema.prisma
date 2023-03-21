@@ -36,18 +36,18 @@ model Farm {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   title     String
-  devices Device[]
-  
+  devices   Device[]
 }
 
 model Device {
-  Id        String      @id
-  updatedAt DateTime? @updatedAt
-  Make      String
-  Model     String
-  Chipset   String?
-  Status    String
-  Availability Boolean  @default(false)
-  farm      Farm?    @relation(fields: [farmId], references: [id])
-  farmId    Int?
+  id           String    @id
+  updatedAt    DateTime? @updatedAt
+  make         String
+  model        String
+  chipset      String?
+  status       String
+  availability Boolean   @default(false)
+  location     String
+  farm         Farm?     @relation(fields: [farmId], references: [id])
+  farmId       Int?
 }

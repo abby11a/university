@@ -11,21 +11,21 @@ export default async function handle(
     where: {
       OR: [
         {
-          Make: {
+          make: {
             contains: Array.isArray(searchString)
               ? searchString[0]
               : searchString,
           },
         },
         {
-          Model: {
+          model: {
             contains: Array.isArray(searchString)
               ? searchString[0]
               : searchString,
           },
         },
         {
-          Chipset: {
+          chipset: {
             contains: Array.isArray(searchString)
               ? searchString[0]
               : searchString,

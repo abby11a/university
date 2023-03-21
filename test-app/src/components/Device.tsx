@@ -1,25 +1,31 @@
 import React from 'react'
 import Router from 'next/router'
-import ReactMarkdown from 'react-markdown'
 import styles from '@/components/Device.module.css'
 
-// Each device component when listed
-
+// Datatype for each device
 export type DeviceProps = {
-  Id: string,
-  Make: string,
-  Model: string,
-  Status: string,
-  Chipset?: string
+  id: string,
+  updatedAt?: Date,
+  make: string,
+  model: string,
+  chipset?: string,
+  status: string,
+  availability?: Boolean,
+  location: string,
+  farm?: {}
 }
 
+// Returns a table row of device attributes
 const Device: React.FC<{ device: DeviceProps }> = ({ device }) => {
   return (
-    <tr key={device.Id} className={styles.Device} onClick={() => Router.push('/single-device/[id]', `/single-device/${device.Id}`)}>
-      <td>{device.Id}</td>
-      <td>{device.Make}</td>
-      <td>{device.Model}</td>
-      <td>{device.Status}</td>
+    <tr key={device.id} className={styles.Device} onClick={() => Router.push('/single-device/[id]', `/single-device/${device.id}`)}>
+      <td>{device.id}</td>
+      <td>{device.make}</td>
+      <td>{device.model}</td>
+      <td>{device.chipset}</td>
+      <td>{device.status}</td>
+      <td>{String(device.availability)}</td>
+      <td>{device.location}</td>
     </tr>
   )
 }

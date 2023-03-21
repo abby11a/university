@@ -8,13 +8,18 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { Id, Make, Model, Status } = req.body
+  const { id, updatedAt, make, model, chipset, status, availability, location, farmId } = req.body
   const result = await prisma.device.create({
     data: {
-      Id,
-      Make,
-      Model,
-      Status
+      id,
+      updatedAt,
+      make,
+      model,
+      chipset,
+      status,
+      availability,
+      location,
+      farmId
     },
   })
   return res.status(201).json(result)

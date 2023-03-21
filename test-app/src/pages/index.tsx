@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
 import Device, { DeviceProps } from '../components/Device'
 import prisma from '../lib/prisma'
-import styles from '@/styles/Device.module.css'
+
 // localhost:3000 (main page)
 
 type Props = {
@@ -28,7 +28,7 @@ const devicesTable = (props: Props) => {
   }
 }
 
-// table header
+// Table header
 const tableHead = () => {
   return (
     <thead>
@@ -36,27 +36,25 @@ const tableHead = () => {
         <th>Id</th>
         <th>Make</th>
         <th>Model</th>
+        <th>Chipset</th>
         <th>Status</th>
+        <th>Availabilty</th>
+        <th>Location</th>
+        <th>Farm ID</th>
       </tr>
     </thead>
   )
 }
 
-// List of devices
+// Returns list of devices in rows <tr><td>
 const tableBody = (props: Props) => {
   return (
     <tbody>{
       props.devices.map((device) => {
         return (
           <Device
-            key = {device.Id}
-            device = {{
-              Id: device.Id,
-              Make: device.Make,
-              Model: device.Model,
-              Status: device.Status,
-              Chipset: device.Chipset
-            }} 
+            key = {device.id}
+            device = {device} 
           />
         )
       })

@@ -19,9 +19,9 @@ export default async function handle(
 }
 
 // DELETE /api/device/:id
-async function handleDELETE(Id: string, res: NextApiResponse<any>) {
+async function handleDELETE(id: string, res: NextApiResponse<any>) {
   const post = await prisma.device.delete({
-    where: { Id },
+    where: { id },
   })
   return res.json(post)
 }
