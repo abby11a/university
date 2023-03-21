@@ -9,7 +9,7 @@ export default async function handle(
 
   switch (req.method) {
     case 'DELETE':
-      return handleDELETE(postId, res)
+      return handleDELETE(String(postId), res)
 
     default:
       throw new Error(
@@ -18,10 +18,10 @@ export default async function handle(
   }
 }
 
-// DELETE /api/post/:id
-async function handleDELETE(postId: unknown, res: NextApiResponse<any>) {
-  const post = await prisma.post.delete({
-    where: { id: Number(postId) },
+// DELETE /api/device/:id
+async function handleDELETE(Id: string, res: NextApiResponse<any>) {
+  const post = await prisma.device.delete({
+    where: { Id },
   })
   return res.json(post)
 }

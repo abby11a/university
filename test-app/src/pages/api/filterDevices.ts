@@ -1,24 +1,31 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../lib/prisma'
 
-// GET /api/filterPosts?searchString=:searchString
+// GET /api/filterDevices?searchString=:searchString
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
   const { searchString } = req.query
-  const resultPosts = await prisma.post.findMany({
+  const resultDevices = await prisma.device.findMany({
     where: {
       OR: [
         {
-          title: {
+          Make: {
             contains: Array.isArray(searchString)
               ? searchString[0]
               : searchString,
           },
         },
         {
-          content: {
+          Model: {
+            contains: Array.isArray(searchString)
+              ? searchString[0]
+              : searchString,
+          },
+        },
+        {
+          Chipset: {
             contains: Array.isArray(searchString)
               ? searchString[0]
               : searchString,
@@ -27,5 +34,5 @@ export default async function handle(
       ],
     },
   })
-  return res.json(resultPosts)
+  return res.json(resultDevices)
 }

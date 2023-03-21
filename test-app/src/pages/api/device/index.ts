@@ -8,12 +8,13 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { title, content, authorEmail } = req.body
-  const result = await prisma.post.create({
+  const { Id, Make, Model, Status } = req.body
+  const result = await prisma.device.create({
     data: {
-      title: title,
-      content: content,
-      author: { connect: { email: authorEmail } },
+      Id,
+      Make,
+      Model,
+      Status
     },
   })
   return res.status(201).json(result)

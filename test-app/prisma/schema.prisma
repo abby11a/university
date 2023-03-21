@@ -2,9 +2,14 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// datasource db {
+//   provider = "sqlite"
+//   url      = "file:./dev.db"
+// }
+
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mysql"
+  url = "mysql://root:<password>@localhost:3306/mydatabase"
 }
 
 model User {
@@ -26,3 +31,23 @@ model Post {
   authorId  Int?
 }
 
+model Farm {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String
+  devices Device[]
+  
+}
+
+model Device {
+  Id        String      @id
+  updatedAt DateTime? @updatedAt
+  Make      String
+  Model     String
+  Chipset   String?
+  Status    String
+  Availability Boolean  @default(false)
+  farm      Farm?    @relation(fields: [farmId], references: [id])
+  farmId    Int?
+}

@@ -1,25 +1,76 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
-import Post, { PostProps } from '../components/Post'
+import Device, { DeviceProps } from '../components/Device'
 import prisma from '../lib/prisma'
-import styles from '@/styles/Blog.module.css'
+import styles from '@/styles/Device.module.css'
+// localhost:3000 (main page)
 
 type Props = {
-  feed: PostProps[]
+  devices: DeviceProps[]
 }
 
-const Blog: React.FC<Props> = (props) => {
+const devicesTable = (props: Props) => {
+  if (!props.devices) {
+    console.log(props)
+    return (
+      <div>
+        No Devices Listed
+      </div>
+    )
+  } else {
+    return (
+      <table>
+        {tableHead()}
+        {tableBody(props)}
+      </table>
+    )
+  }
+}
+
+// table header
+const tableHead = () => {
+  return (
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+  )
+}
+
+// List of devices
+const tableBody = (props: Props) => {
+  return (
+    <tbody>{
+      props.devices.map((device) => {
+        return (
+          <Device
+            key = {device.Id}
+            device = {{
+              Id: device.Id,
+              Make: device.Make,
+              Model: device.Model,
+              Status: device.Status,
+              Chipset: device.Chipset
+            }} 
+          />
+        )
+      })
+    }</tbody>
+  )
+}
+
+const Devices: React.FC<Props> = (props) => {
   return (
     <Layout>
       <div>
-        <h1>My Blog</h1>
+        <h1>Devices</h1>
         <main>
-          {props.feed.map((post) => (
-            <div key={post.id} className={styles.post}>
-              <Post post={post} />
-            </div>
-          ))}
+          {devicesTable(props)}
         </main>
       </div>
     </Layout>
@@ -27,13 +78,10 @@ const Blog: React.FC<Props> = (props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const feed = await prisma.post.findMany({
-    where: { published: true },
-    include: { author: true },
-  })
+  const devices = await prisma.device.findMany({})
   return {
-    props: { feed },
+    props: { devices },
   }
 }
 
-export default Blog
+export default Devices;
