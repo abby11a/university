@@ -2,15 +2,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// datasource db {
-//   provider = "sqlite"
-//   url      = "file:./dev.db"
-// }
-
 datasource db {
-  provider = "mysql"
-  url = "mysql://root:<password>@localhost:3306/mydatabase"
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
+
+//datasource db {
+//  provider = "mysql"
+//  url = "mysql://root:<password>@localhost:3306/mydatabase"
+//}
 
 model User {
   id    Int     @id @default(autoincrement())
