@@ -5,8 +5,8 @@ import Router from 'next/router';
 import prisma from '../../lib/prisma';
 import styles from '@/styles/Post.module.css';
 import Device, { DeviceProps } from '@/components/Device';
-import { TableHeader } from '@/components/DeviceHeader';
 import Form from '@/pages/form';
+import { TableHeader } from '@/components/DeviceHeader';
 
 // delete device
 async function destroy(id: string): Promise<void> {
@@ -16,20 +16,39 @@ async function destroy(id: string): Promise<void> {
   await Router.push('/')
 }
 
+// Updates fields
+async function update(device: DeviceProps): Promise<void> {
+  try {
+    await fetch(`/api/device/${device.id}/edit`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: device.id, 
+        data: {
+          updatedAt: device.updatedAt,
+          make: device.make, 
+          model: device.model,
+          chipset: device.chipset,
+          status: device.status,
+          availability: device.availability,
+          location: device.location
+        }}),
+    })
+    await Router.push('/')
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 const Post: React.FC<DeviceProps> = (props) => {
   const [edit, setEditView] = useState(false)
   // edit device
   if (edit) {
-    const handleSubmit = (values: DeviceProps) => {
-      console.log("Form submitted with values:", values);
-      // Handle form submission logic here
-    };
-
     return (
       <Layout>
         <div>
-          <h2>{props.id}</h2>
-          <Form deviceValues={props} onSubmit={handleSubmit} />
+          <h1>Edit Device {props.id}</h1>
+          <Form deviceValues={props} onSubmit={update} idUnvailable={true}/>
         </div>
       </Layout>
     )

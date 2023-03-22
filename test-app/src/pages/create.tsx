@@ -2,6 +2,7 @@ import React from 'react'
 import Router from 'next/router'
 import Form from './form'
 import { DeviceProps } from '@/components/Device'
+import Layout from '@/components/Layout';
 
 /* Create a Device page - localhost:3000/create */
 
@@ -32,7 +33,10 @@ const Create = () => {
   }
 
   return (
-    <Form onSubmit={submitData} deviceValues={emptyValues} />
+    <Layout>
+      <h1>Create Device</h1>
+      <Form onSubmit={submitData} deviceValues={emptyValues} idUnvailable={false}/>
+    </Layout>
   )
 }
 

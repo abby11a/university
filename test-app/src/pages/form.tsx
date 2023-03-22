@@ -4,9 +4,11 @@ import { DeviceProps } from "@/components/Device";
 interface Props {
     deviceValues: DeviceProps;
     onSubmit: (values: DeviceProps) => void;
+    idUnvailable: boolean; // Stop people editing unique ID
 }
 
-const Form: React.FC<Props> = ({ deviceValues, onSubmit }) => {
+// Form for creating and editing devices
+const Form: React.FC<Props> = ({ deviceValues, onSubmit, idUnvailable }) => {
     const [device, setDevice] = React.useState<DeviceProps>(deviceValues);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -21,15 +23,17 @@ const Form: React.FC<Props> = ({ deviceValues, onSubmit }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-          <h1>Create Device</h1>
+          <label>ID</label>
           <input
             name="id"
+            disabled={idUnvailable}
             autoFocus
             onChange={(e) => handleChange(e)}
             placeholder="Id"
             type="text"
             value={device.id}
           />
+          <label>Make</label>
           <input
             name="make"
             onChange={(e) => handleChange(e)}
@@ -37,6 +41,7 @@ const Form: React.FC<Props> = ({ deviceValues, onSubmit }) => {
             type="text"
             value={device.make}
           />
+          <label>Model</label>
           <input
             name="model"
             onChange={(e) => handleChange(e)}
@@ -44,6 +49,7 @@ const Form: React.FC<Props> = ({ deviceValues, onSubmit }) => {
             type="text"
             value={device.model}
           />
+          <label>Status</label>
           <input
             name="status"
             onChange={(e) => handleChange(e)}
@@ -51,6 +57,7 @@ const Form: React.FC<Props> = ({ deviceValues, onSubmit }) => {
             type="text"
             value={device.status}
           />
+          <label>Chipset</label>
           <input
             name="chipset"
             onChange={(e) => handleChange(e)}
@@ -58,6 +65,7 @@ const Form: React.FC<Props> = ({ deviceValues, onSubmit }) => {
             type="text"
             value={device.chipset}
           />
+          <label>Location</label>
           <input
             name="location"
             onChange={(e) => setDevice({ ...device, location: e.target.value })}
