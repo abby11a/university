@@ -23,16 +23,17 @@ async function update(device: DeviceProps): Promise<void> {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        id: device.id, 
+        id: device.id,
         data: {
           updatedAt: device.updatedAt,
-          make: device.make, 
+          make: device.make,
           model: device.model,
           chipset: device.chipset,
           status: device.status,
           availability: device.availability,
           location: device.location
-        }}),
+        }
+      }),
     })
     await Router.push('/')
   } catch (error) {
@@ -48,7 +49,7 @@ const Post: React.FC<DeviceProps> = (props) => {
       <Layout>
         <div>
           <h1>Edit Device {props.id}</h1>
-          <Form deviceValues={props} onSubmit={update} idUnvailable={true}/>
+          <Form deviceValues={props} onSubmit={update} idUnvailable={true} />
         </div>
       </Layout>
     )

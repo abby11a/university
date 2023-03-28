@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import Device, { DeviceProps } from '../components/Device'
 import prisma from '../lib/prisma'
 import { TableHeader } from '@/components/DeviceHeader'
+import { useSession, signIn } from "next-auth/react"
 
 // localhost:3000 (main page)
 type Props = {
@@ -46,16 +47,35 @@ const tableBody = (props: Props) => {
 }
 
 const Devices: React.FC<Props> = (props) => {
-  return (
-    <Layout>
-      <div>
-        <h1>Devices</h1>
-        <main>
-          {devicesTable(props)}
-        </main>
-      </div>
-    </Layout>
-  )
+  const { data: session, status } = useSession()
+
+  // Authenticated
+  if (status === "authenticated") {
+    return (
+      <Layout>
+        <div>
+          <h1>Devices</h1>
+          <main>
+            {devicesTable(props)}
+          </main>
+        </div>
+      </Layout>
+    )
+
+  // Unauthenticated
+  } else { 
+    return (
+      <section>
+        <div>
+          <h2>Welcome To Inventory Manager</h2><br />
+          <p>You currently not authenticated.</p>
+          <button type="button" onClick={() => signIn()}>
+            Login
+          </button>
+        </div>
+      </section>
+    );
+  }
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {

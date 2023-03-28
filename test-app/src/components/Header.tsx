@@ -2,8 +2,9 @@ import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styles from '@/components/Header.module.css'
+import { signOut } from 'next-auth/react'
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   const router = useRouter()
   const isActive: (pathname: string) => boolean = (pathname) =>
     router.pathname === pathname
@@ -18,12 +19,12 @@ const Header: React.FC = () => {
         </Link>
       </div>
       <div className={styles.right}>
-        <Link href="/signup" legacyBehavior>
-          <a data-active={isActive('/signup')}>Signup</a>
-        </Link>
         <Link href="/create" legacyBehavior>
           <a data-active={isActive('/create')}>+ Create device</a>
         </Link>
+        <button onClick={()=>signOut()}>
+          Sign Out
+        </button>
       </div>
     </nav>
   )

@@ -8,7 +8,7 @@ interface Props {
 }
 
 // Form for creating and editing devices
-const Form: React.FC<Props> = ({ deviceValues, onSubmit, idUnvailable }) => {
+export const Form: React.FC<Props> = ({ deviceValues, onSubmit, idUnvailable }) => {
     const [device, setDevice] = React.useState<DeviceProps>(deviceValues);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -22,57 +22,63 @@ const Form: React.FC<Props> = ({ deviceValues, onSubmit, idUnvailable }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-          <label>ID</label>
-          <input
-            name="id"
-            disabled={idUnvailable}
-            autoFocus
-            onChange={(e) => handleChange(e)}
-            placeholder="Id"
-            type="text"
-            value={device.id}
-          />
-          <label>Make</label>
-          <input
-            name="make"
-            onChange={(e) => handleChange(e)}
-            placeholder="Make"
-            type="text"
-            value={device.make}
-          />
-          <label>Model</label>
-          <input
-            name="model"
-            onChange={(e) => handleChange(e)}
-            placeholder="Model"
-            type="text"
-            value={device.model}
-          />
-          <label>Status</label>
-          <input
-            name="status"
-            onChange={(e) => handleChange(e)}
-            placeholder="Status"
-            type="text"
-            value={device.status}
-          />
-          <label>Chipset</label>
-          <input
-            name="chipset"
-            onChange={(e) => handleChange(e)}
-            placeholder="Chipset"
-            type="text"
-            value={device.chipset}
-          />
-          <label>Location</label>
-          <input
-            name="location"
-            onChange={(e) => setDevice({ ...device, location: e.target.value })}
-            placeholder="Location"
-            type="text"
-            value={device.location}
-          />
+        <form onSubmit={handleSubmit} data-testid={"Form"}>
+          <label>ID
+            <input
+              name="id"
+              disabled={idUnvailable}
+              autoFocus
+              onChange={(e) => handleChange(e)}
+              placeholder="Id"
+              type="text"
+              value={device.id}
+            />
+          </label>
+          <label>Make
+            <input
+              name="make"
+              onChange={(e) => handleChange(e)}
+              placeholder="Make"
+              type="text"
+              value={device.make}
+            />
+          </label>
+          <label>Model
+            <input
+              name="model"
+              onChange={(e) => handleChange(e)}
+              placeholder="Model"
+              type="text"
+              value={device.model}
+            />
+          </label>
+          <label>Status
+            <input
+              name="status"
+              onChange={(e) => handleChange(e)}
+              placeholder="Status"
+              type="text"
+              value={device.status}
+            />
+          </label>
+          <label>Chipset
+            <input
+              name="chipset"
+              onChange={(e) => handleChange(e)}
+              placeholder="Chipset"
+              type="text"
+              value={device.chipset}
+            />
+          </label>
+          <label>Location
+            <input
+              name="location"
+              onChange={(e) => setDevice({ ...device, location: e.target.value })}
+              placeholder="Location"
+              type="text"
+              value={device.location}
+            />
+          </label>
           <input
             disabled={!device.id || !device.make || !device.model || !device.status}
             type="submit"
