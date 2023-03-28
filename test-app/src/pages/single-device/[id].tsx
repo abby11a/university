@@ -5,8 +5,8 @@ import Router from 'next/router';
 import prisma from '../../lib/prisma';
 import styles from '@/styles/Post.module.css';
 import Device, { DeviceProps } from '@/components/Device';
-import Form from '@/pages/form';
-import { TableHeader } from '@/components/DeviceHeader';
+import Form from '@/components/Form';
+import { TableHeader } from '@/components/TableHeader';
 
 // delete device
 async function destroy(id: string): Promise<void> {

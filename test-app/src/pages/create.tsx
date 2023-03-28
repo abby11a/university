@@ -1,8 +1,8 @@
 import React from 'react'
 import Router from 'next/router'
-import Form from './form'
 import { DeviceProps } from '@/components/Device'
 import Layout from '@/components/Layout';
+import Form from '@/components/Form';
 
 /* Create a Device page - localhost:3000/create */
 

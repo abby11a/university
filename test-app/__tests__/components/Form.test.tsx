@@ -1,7 +1,8 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import Form from '../src/pages/form';
-import { devicesMock, emptyDeviceMock } from '../__mocks__/devicesMock';
+
+import { devicesMock, emptyDeviceMock } from '../../__mocks__/devicesMock';
+import Form from '@/components/Form';
 
 const newDevice = {
     id: "newID",

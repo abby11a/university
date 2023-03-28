@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react'
-import Create from '../src/pages/create';
+import Create from '../../src/pages/create';
 
 jest.mock('next/router', () => ({
     useRouter() {

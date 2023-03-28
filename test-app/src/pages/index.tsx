@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
 import Device, { DeviceProps } from '../components/Device'
 import prisma from '../lib/prisma'
-import { TableHeader } from '@/components/DeviceHeader'
+import { TableHeader } from '@/components/TableHeader'
 import { useSession, signIn } from "next-auth/react"
 
 // localhost:3000 (main page)

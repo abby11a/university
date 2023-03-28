@@ -1,5 +1,5 @@
 import React from "react";
-import { DeviceProps } from "@/components/Device";
+import { DeviceProps } from "./Device";
 
 interface Props {
     deviceValues: DeviceProps;
