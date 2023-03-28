@@ -13,6 +13,7 @@ git clone https://github.com/abby11a/university
 Install npm dependencies:
 
 ```
+cd university
 cd test-app
 npm install
 ```
@@ -33,6 +34,11 @@ npm run dev
 ```
 
 The app is now running, navigate to [`http://localhost:3000/`](http://localhost:3000/) in your browser to explore its UI.
+
+### 4. Unit test the app
+```
+npm run test
+```
 
 ## Using the REST API
 
