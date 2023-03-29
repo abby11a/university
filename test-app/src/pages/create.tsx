@@ -3,6 +3,7 @@ import Router from 'next/router'
 import { DeviceProps } from '@/components/Device'
 import Layout from '@/components/Layout';
 import Form from '@/components/Form';
+import styles from "../styles/device.module.css";
 
 /* Create a Device page - localhost:3000/create */
 
@@ -34,7 +35,7 @@ const Create = () => {
 
   return (
     <Layout>
-      <h1>Create Device</h1>
+      <h1 className={styles.heading}>Create Device</h1>
       <Form onSubmit={submitData} deviceValues={emptyValues} idUnvailable={false}/>
     </Layout>
   )

@@ -1,6 +1,6 @@
 .form {
 	margin-top: 2vh;
-    margin-bottom: 1rem;
+    margin-bottom: 2vh;
     border-radius: 10px;
     border-color: transparent;
     padding: 2%;
@@ -9,6 +9,7 @@
     background-color:#a8b2e6;
     top: 2%;
     min-width: 300px;
+    max-width: 100vw;
 }
 
 .form label {
@@ -28,10 +29,14 @@
     color: #461e63;
 }
 
+.form input[type="text"]:disabled {
+	background-color: #3a20751f;
+    color: #461e63;
+}
+
 .heading {
 	text-align: left;
 	margin-top: 1em;
-	margin-left: 1em;
 	color: #461e63;
 	font-size: 2em;
 	font-weight: 400;

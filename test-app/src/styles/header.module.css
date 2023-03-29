@@ -7,19 +7,21 @@
 	background-color: #a8b2e6;
     font-size: 25px;
     color: #e7ecff;
+	width: 100vw;
 }
 
-.header .right a[data-active="true"] {
+.header .right a[data-active="true"], .header .right a:hover {
 	color: white;
 	background-color: #461e63;
 }
 
-.header .right a:hover {
+
+.header button:hover {
 	color: white;
 	background-color: #461e63;
 }
 
-.header .left a[data-active="true"] {
+.header .left a[data-active="true"], .header .left a:hover {
 	color: #461e63;
 }
 
@@ -32,7 +34,7 @@
 	margin-left: auto;
 }
 
-.right a {
+.right a, .header button {
 	margin-left: 15px;
 	margin-top: 4%;
 	border-radius: 20px;
@@ -46,25 +48,4 @@
 	font-weight: bold;
 	font-size: medium;
 	box-shadow: 5px 8px #3a20751f;
-}
-
-.header button {
-	margin-left: 15px;
-	margin-top: 4%;
-	border-radius: 20px;
-	padding: 10px;
-    padding-right: 20px;
-    padding-left: 20px;
-	width: max-content;
-	border: none;
-    background-color: #e7ecff;
-	color: #461e63;
-	font-weight: bold;
-	font-size: medium;
-	box-shadow: 5px 8px #3a20751f;
-}
-
-.header button:hover {
-	color: white;
-	background-color: #461e63;
 }

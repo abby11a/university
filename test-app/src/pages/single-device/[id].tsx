@@ -48,7 +48,7 @@ const Post: React.FC<DeviceProps> = (props) => {
     return (
       <Layout>
         <div>
-          <h1>Edit Device {props.id}</h1>
+          <h1 className={styles.heading}>Edit Device {props.id}</h1>
           <Form deviceValues={props} onSubmit={update} idUnvailable={true} />
         </div>
       </Layout>
