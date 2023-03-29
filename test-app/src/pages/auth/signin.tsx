@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { getProviders, getSession, signIn } from "next-auth/react";
-import styles from "../../styles/Auth.module.css";
+import styles from "../../styles/auth.module.css";
 
 const Signin = () => {
 	const email = useRef("");

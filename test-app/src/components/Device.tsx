@@ -1,6 +1,6 @@
 import React from 'react'
 import Router from 'next/router'
-import styles from '@/components/Device.module.css'
+import styles from "../styles/device.module.css";
 
 // Datatype for each device
 export type DeviceProps = {

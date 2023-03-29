@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import styles from "@/components/Header.module.css";
+import styles from "../styles/header.module.css";
 import { signOut } from "next-auth/react";
 
 export const Header: React.FC = () => {
@@ -8,10 +8,10 @@ export const Header: React.FC = () => {
 	window.location.pathname === pathname;
 
 	return (
-		<nav>
+		<nav className={styles.header}>
 			<div className={styles.left}>
 				<Link href="/" legacyBehavior>
-					<a className={styles.bold} data-active={isActive("/")}>
+					<a data-active={isActive("/")}>
 						Device List
 					</a>
 				</Link>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Router from "next/router";
-import styles from "../../styles/Auth.module.css";
+import styles from "../../styles/auth.module.css";
 
 const SignUp: React.FC = () => {
 	const [name, setName] = useState("");

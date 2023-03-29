@@ -1,0 +1,70 @@
+.header {
+	border-color: transparent;
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: 5px 8px #3a20751f;
+	height: 120%;
+	background-color: #a8b2e6;
+    font-size: 25px;
+    color: #e7ecff;
+}
+
+.header .right a[data-active="true"] {
+	color: white;
+	background-color: #461e63;
+}
+
+.header .right a:hover {
+	color: white;
+	background-color: #461e63;
+}
+
+.header .left a[data-active="true"] {
+	color: #461e63;
+}
+
+.header .left a{
+    color: #e7ecff;
+    font-weight: bolder;
+}
+
+.right {
+	margin-left: auto;
+}
+
+.right a {
+	margin-left: 15px;
+	margin-top: 4%;
+	border-radius: 20px;
+	padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+	width: max-content;
+	border: none;
+    background-color: #e7ecff;
+	color: #461e63;
+	font-weight: bold;
+	font-size: medium;
+	box-shadow: 5px 8px #3a20751f;
+}
+
+.header button {
+	margin-left: 15px;
+	margin-top: 4%;
+	border-radius: 20px;
+	padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+	width: max-content;
+	border: none;
+    background-color: #e7ecff;
+	color: #461e63;
+	font-weight: bold;
+	font-size: medium;
+	box-shadow: 5px 8px #3a20751f;
+}
+
+.header button:hover {
+	color: white;
+	background-color: #461e63;
+}

@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import Layout from '../../components/Layout';
 import Router from 'next/router';
 import prisma from '../../lib/prisma';
-import styles from '@/styles/Post.module.css';
+import styles from "../../styles/device.module.css";
 import Device, { DeviceProps } from '@/components/Device';
 import Form from '@/components/Form';
 import { TableHeader } from '@/components/TableHeader';
@@ -57,8 +57,8 @@ const Post: React.FC<DeviceProps> = (props) => {
     // view device
     return (
       <Layout>
-        <div>
-          <h2>{props.id}</h2>
+        <div className={styles.singledevice}>
+          <h2 className={styles.heading}>{props.id}</h2>
           <table>
             <TableHeader />
             <tbody>
@@ -66,11 +66,11 @@ const Post: React.FC<DeviceProps> = (props) => {
             </tbody>
           </table>
 
-          <button className={styles.button} onClick={() => setEditView(true)}>
+          <button className={styles.twobuttons} onClick={() => setEditView(true)}>
             Edit
           </button>
 
-          <button className={styles.button} onClick={() => destroy(props.id)}>
+          <button className={styles.twobuttons} onClick={() => destroy(props.id)}>
             Delete
           </button>
         </div>

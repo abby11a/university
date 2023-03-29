@@ -1,10 +1,11 @@
-import React from 'react'
-import { GetServerSideProps } from 'next'
-import Layout from '../components/Layout'
-import Device, { DeviceProps } from '../components/Device'
-import prisma from '../lib/prisma'
-import { TableHeader } from '@/components/TableHeader'
-import { useSession, signIn } from "next-auth/react"
+import React from 'react';
+import { GetServerSideProps } from 'next';
+import Layout from '../components/Layout';
+import Device, { DeviceProps } from '../components/Device';
+import prisma from '../lib/prisma';
+import { TableHeader } from '@/components/TableHeader';
+import { useSession, signIn } from "next-auth/react";
+import styles from "../styles/device.module.css";
 
 // localhost:3000 (main page)
 type Props = {
@@ -14,7 +15,7 @@ type Props = {
 // Returns the table
 const devicesTable = (props: Props) => {
   if (!props.devices) {
-    console.log(props)
+    console.log(props);
     return (
       <div>
         No Devices Listed
@@ -22,7 +23,8 @@ const devicesTable = (props: Props) => {
     )
   } else {
     return (
-      <table>
+      <table 
+      className={styles.table}>
         <TableHeader />
         {tableBody(props)}
       </table>
@@ -54,7 +56,7 @@ const Devices: React.FC<Props> = (props) => {
     return (
       <Layout>
         <div>
-          <h1>Devices</h1>
+          <h1 className={styles.heading}>Devices</h1>
           <main>
             {devicesTable(props)}
           </main>
@@ -67,9 +69,9 @@ const Devices: React.FC<Props> = (props) => {
     return (
       <section>
         <div>
-          <h2>Welcome To Inventory Manager</h2><br />
-          <p>You currently not authenticated.</p>
-          <button type="button" onClick={() => signIn()}>
+          <h2 className={styles.heading}>Welcome To Inventory Manager</h2><br />
+          <p className={styles.text}>You currently not authenticated.</p>
+          <button className={styles.button} type="button" onClick={() => signIn()}>
             Login
           </button>
         </div>
@@ -81,7 +83,7 @@ const Devices: React.FC<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps = async () => {
   const devices = await prisma.device.findMany({})
   return {
-    props: { devices },
+    props: { devices }
   }
 }
 

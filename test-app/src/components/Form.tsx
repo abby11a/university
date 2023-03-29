@@ -1,5 +1,6 @@
 import React from "react";
 import { DeviceProps } from "./Device";
+import styles from "../styles/form.module.css";
 
 interface Props {
     deviceValues: DeviceProps;
@@ -22,7 +23,7 @@ export const Form: React.FC<Props> = ({ deviceValues, onSubmit, idUnvailable }) 
     };
 
     return (
-        <form onSubmit={handleSubmit} data-testid={"Form"}>
+        <form onSubmit={handleSubmit} data-testid={"Form"} className={styles.form}>
           <label>ID
             <input
               name="id"
@@ -80,6 +81,7 @@ export const Form: React.FC<Props> = ({ deviceValues, onSubmit, idUnvailable }) 
             />
           </label>
           <input
+            className={styles.button}
             disabled={!device.id || !device.make || !device.model || !device.status}
             type="submit"
             value="Create"
