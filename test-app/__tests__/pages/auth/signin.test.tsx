@@ -12,14 +12,14 @@ jest.mock('next-auth/react', () => ({
     getProviders: jest.fn(),
 }));
 
-describe('Signin component', () => {
-    it('should call signIn with the correct arguments when the correct form is submitted', async () => {
+describe('Signin', () => {
+    it('should call signIn() with the correct arguments when the correct form is submitted', async () => {
         global.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve());
         render(<Signin />);
 
         const emailInput = screen.getByLabelText('Email address');
         const passwordInput = screen.getByLabelText('Password');
-        const loginButton = screen.getByRole('button', { name: 'Log in' });
+        const loginButton = screen.getByRole('button', { name: "Sign in" });
 
         fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
         fireEvent.change(passwordInput, { target: { value: 'password' } });
