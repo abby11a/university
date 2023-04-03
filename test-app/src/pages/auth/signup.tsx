@@ -6,7 +6,7 @@ const SignUp: React.FC = () => {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [role, setRole] = useState("");
+	const role = "User";
 
 	const submitData = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
@@ -49,20 +49,11 @@ const SignUp: React.FC = () => {
 						/>
 					</label>
 					<label className={styles.input}>
-						Role
-						<input
-							onChange={(e) => setRole(e.target.value)}
-							placeholder="Role"
-							type="text"
-							value={role}
-						/>
-					</label>
-					<label className={styles.input}>
 						Password
 						<input
 							onChange={(e) => setPassword(e.target.value)}
 							placeholder="Password"
-							type="text"
+							type="password"
 							value={password}
 						/>
 					</label>
