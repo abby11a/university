@@ -17,25 +17,27 @@ cd university
 cd test-app
 npm install
 ```
+### 2. Add an env file
+Create a .env file in the test-app folder. In this file be sure to include:
+```
+NextAuth_SECRET= "Any-String"
+```
+### 3. Create and seed the database
 
-### 2. Create and seed the database
-
-Create the Prisma database using a MySql Database and changing /prisma/schema.prisma
+Create the Prisma database using a SQLite Database, seeded in prisma/seed.ts.
 
 ```
 npx prisma migrate dev --name init
 npx prisma migrate dev                                  
 ```
-
-### 3. Start the app
+### 4. Start the app
 
 ```
 npm run dev
 ```
 
 The app is now running, navigate to [`http://localhost:3000/`](http://localhost:3000/) in your browser to explore its UI.
-
-### 4. Unit test the app
+### 5. Unit test the app
 ```
 npm run test
 ```
@@ -53,94 +55,72 @@ You can also access the REST API of the API server directly. It is running on th
 
 - `/api/device`: Create a new device
   - Body:
-    - `Id: String` (required): The ID of the device
-    ...
+    - data: {
+        `id: String`,
+        `updatedAt: Date`,
+        `make: String`,
+        `model: String`,
+        `chipset: String`,
+        `status: String`,
+        `availability: Boolean`,
+        `location: String`, 
+        `farm: Farm`
+      }
+- `/api/device/[id]/edit`: Edit a device
+  - Body:
+    - id: String,
+    - data: {
+        `updatedAt: Date`,
+        `make: String`,
+        `model: String`,
+        `chipset: String`,
+        `status: String`,
+        `availability: Boolean`,
+        `location: String`,
+        `farm: Farm`
+      }
+- `/api/device/[id]`: Delete a device
+  - method: 'DELETE',
+    
 - `/api/user`: Create a new user
   - Body:
     - `email: String` (required): The email address of the user
     - `name: String` (optional): The name of the user
 
-### `PUT`
+## Layout of web app
+### /prisma
+This folder contains all the files concerning the database. 
+- "Prisma is a server-side library that helps developers read and write data to the database in an intuitive, efficient and safe way." (Prisma, 2023)
 
-- `/api/edit/:id`: TODO
+### src/components
+- This folder contains all the reusable components for the web app
+#### AdminButton
+- Creates a button that is only available to admin users, this is used in /pages/[id] to allow admins to delete a device.
+- Whilst this is only used once, I believed it was best practice to add it as a component, in case it is needed later in the development process.
+#### Device
+- Returns a table row for a device
+#### Form
+- Creates an editable form used in the create and edit component
+#### Header
+- Creates a header for the web app, containing navigation of the page
+#### Layout
+- Contains the header and main app in one component
+#### TableHeader
+- Returns the correct header for the device table
 
-### `DELETE`
+### src/pages
+#### /api
+- Contains the APIs for the web app, these are explained in the *Using the REST API* section
+#### /auth
+- Contains the components for the sign in/ sign up pages
+#### /single-device
+- Returns a component that views the information for a single device. Users have the ability to edit and admins have the ability to delete the device
+#### /create
+- Returns a component that is a form to create a device
+#### /index
+- The entry point
+- Brings multiple components together, returns the device table if the user is authenticated, or the authentication pages when the user is not authenticated.
+### /styles
+- The CSS components for the app
 
-- `/api/device/:id`: Delete a device by its `id`
-
-
-## Switch to another database (e.g. PostgreSQL, SQLite, SQL Server, MongoDB)
-
-If you want to try this example with another database than MySQL, you can adjust the the database connection in [`prisma/schema.prisma`](./prisma/schema.prisma) by reconfiguring the `datasource` block. 
-
-Learn more about the different connection configurations in the [docs](https://www.prisma.io/docs/reference/database-reference/connection-urls).
-
-<details><summary>Expand for an overview of example configurations with different databases</summary>
-
-### PostgreSQL
-
-For PostgreSQL, the connection URL has the following structure:
-
-```prisma
-datasource db {
-  provider = "postgresql"
-  url      = "postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA"
-}
-```
-
-Here is an example connection string with a local PostgreSQL database:
-
-```prisma
-datasource db {
-  provider = "postgresql"
-  url      = "postgresql://janedoe:mypassword@localhost:5432/notesapi?schema=public"
-}
-```
-
-### MySQL
-
-For MySQL, the connection URL has the following structure:
-
-```prisma
-datasource db {
-  provider = "mysql"
-  url      = "mysql://USER:PASSWORD@HOST:PORT/DATABASE"
-}
-```
-
-Here is an example connection string with a local MySQL database:
-
-```prisma
-datasource db {
-  provider = "mysql"
-  url      = "mysql://janedoe:mypassword@localhost:3306/notesapi"
-}
-```
-
-### Microsoft SQL Server
-
-Here is an example connection string with a local Microsoft SQL Server database:
-
-```prisma
-datasource db {
-  provider = "sqlserver"
-  url      = "sqlserver://localhost:1433;initial catalog=sample;user=sa;password=mypassword;"
-}
-```
-
-### MongoDB
-
-Here is an example connection string with a local MongoDB database:
-
-```prisma
-datasource db {
-  provider = "mongodb"
-  url      = "mongodb://USERNAME:PASSWORD@HOST/DATABASE?authSource=admin&retryWrites=true&w=majority"
-}
-```
-
-</details>
-
-### Created using a fullstack example with Next.js (REST API)
-
-This example shows how to implement a **fullstack app in TypeScript with [Next.js](https://nextjs.org/)** using [React](https://reactjs.org/) and [Prisma Client](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client). It uses a SQLite database file with some initial dummy data which you can find at [`./prisma/dev.db`](./prisma/dev.db).
+This code was built upon a NextJS fullstack app example, which shows how to implement a **fullstack app in TypeScript with [Next.js](https://nextjs.org/)** using [React](https://reactjs.org/) and [Prisma Client](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
