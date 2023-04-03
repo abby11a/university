@@ -2,10 +2,10 @@ import React from "react";
 import Link from "next/link";
 import styles from "../styles/header.module.css";
 import { signOut } from "next-auth/react";
+import router from "next/router";
 
 export const Header: React.FC = () => {
-	const isActive: (pathname: string) => boolean = (pathname) =>
-	window.location.pathname === pathname;
+	const isActive: (pathname: string) => boolean = (pathname) => window.location.pathname === pathname;
 
 	return (
 		<nav className={styles.header}>
@@ -17,9 +17,7 @@ export const Header: React.FC = () => {
 				</Link>
 			</div>
 			<div className={styles.right}>
-				<Link href="/create" legacyBehavior>
-					<a data-active={isActive("/create")}>+ Create device</a>
-				</Link>
+				<button onClick={()=>router.push("/create")} data-active={isActive("/create")}>Create Device</button>
 				<button onClick={() => signOut()}>Sign Out</button>
 			</div>
 		</nav>

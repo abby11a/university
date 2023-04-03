@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../../lib/prisma'
 
+// Delete device - /api/device/[id]
+
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -18,10 +20,9 @@ export default async function handle(
   }
 }
 
-// DELETE /api/device/:id
 async function handleDELETE(id: string, res: NextApiResponse<any>) {
-  const post = await prisma.device.delete({
+  const device = await prisma.device.delete({
     where: { id },
   })
-  return res.json(post)
+  return res.json(device)
 }

@@ -3,6 +3,7 @@ import { render, fireEvent, screen, waitFor } from '@testing-library/react'
 import Create from '../../src/pages/create';
 import Router from "next/router";
 import { devicesMock } from '../../__mocks__/devicesMock';
+import { SessionProvider } from 'next-auth/react';
 
 jest.mock("next/router", () => ({
 	push: jest.fn(),
@@ -10,16 +11,16 @@ jest.mock("next/router", () => ({
 
 describe('Create component', () => {
     const device = devicesMock[0];
-
+    const session = { user: { name: "John Doe", email: "john.doe@example.com", role: 'Admin'}, expires: "12345" };
     test('renders the Create page', () => {
-        render(<Create />)
-        expect(screen.getByText('Create Device')).toBeInTheDocument()
+        render(<SessionProvider session={session}><Create/></SessionProvider>)
+        expect(screen.getByRole("heading", {name: "Create Device"})).toBeInTheDocument()
     })
 
     // Creating a device functionality tested in __tests__/components/form.test.tsx
 
     it('should have empty values so the user can create a new device', async () => {
-        render(<Create />);
+        render(<SessionProvider session={session}><Create/></SessionProvider>);
 
         const idInput = screen.getByRole('textbox', { name: "ID" });
         const makeInput = screen.getByRole('textbox', { name: "Make" });
@@ -39,7 +40,7 @@ describe('Create component', () => {
     it ('should refresh the page when successful', async () => {
         global.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve());
 
-        const { getByLabelText } = render(<Create />);
+        const { getByLabelText } = render(<SessionProvider session={session}><Create/></SessionProvider>);
 
         fireEvent.change(getByLabelText('ID'), { target: { value: device.id } });
         fireEvent.change(getByLabelText('Make'), { target: { value: device.make } });
@@ -59,7 +60,7 @@ describe('Create component', () => {
 
         const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
 
-        const { getByLabelText } = render(<Create />);
+        const { getByLabelText } = render(<SessionProvider session={session}><Create/></SessionProvider>);
 
         fireEvent.change(getByLabelText('ID'), { target: { value: device.id } });
         fireEvent.change(getByLabelText('Make'), { target: { value: device.make } });

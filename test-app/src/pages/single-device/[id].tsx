@@ -7,13 +7,17 @@ import styles from "../../styles/device.module.css";
 import Device, { DeviceProps } from '@/components/Device';
 import Form from '@/components/Form';
 import { TableHeader } from '@/components/TableHeader';
+import { useSession } from 'next-auth/react';
+// View, edit and delete a single device
 
 // delete device
 async function destroy(id: string): Promise<void> {
-  await fetch(`/api/device/${id}`, {
-    method: 'DELETE',
-  })
-  await Router.push('/')
+  if (window.confirm('Are you sure you want to delete this item?')) {
+    await fetch(`/api/device/${id}`, {
+      method: 'DELETE',
+    })
+    await Router.push('/')
+  }
 }
 
 // Updates fields
@@ -43,6 +47,7 @@ async function update(device: DeviceProps): Promise<void> {
 
 const Post: React.FC<DeviceProps> = (props) => {
   const [edit, setEditView] = useState(false)
+  const session = useSession();
   // edit device
   if (edit) {
     return (
@@ -65,14 +70,17 @@ const Post: React.FC<DeviceProps> = (props) => {
               <Device device={props} />
             </tbody>
           </table>
+          <div>
+            <button className={styles.twobuttons} onClick={() => setEditView(true)}>
+              Edit
+            </button>
+            {session.data?.user?.role === 'Admin' && (
+              <button className={styles.twobuttons} onClick={() => destroy(props.id)}>
+                Delete
+              </button>
+            )}
+          </div>
 
-          <button className={styles.twobuttons} onClick={() => setEditView(true)}>
-            Edit
-          </button>
-
-          <button className={styles.twobuttons} onClick={() => destroy(props.id)}>
-            Delete
-          </button>
         </div>
       </Layout>
     )

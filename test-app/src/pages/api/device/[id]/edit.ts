@@ -10,7 +10,7 @@ export default async function handle(
 }
 
 
-// UPDATE /api/device/:id
+// Edit device - /api/device/[id]/edit
 async function handleUPDATE(req: NextApiRequest, res: NextApiResponse<any>) {
 	const post = await prisma.device.update({
 		where: { id: req.body.id },
