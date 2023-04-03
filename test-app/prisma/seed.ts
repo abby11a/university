@@ -14,6 +14,18 @@ const userData: Prisma.UserCreateInput[] = [
     email: 'abby@prisma.io',
     password: 'password',
     role: 'Admin'
+  },
+  {
+    name: 'Admin',
+    email: 'admin@prisma.io',
+    password: 'password',
+    role: 'Admin'
+  },
+  {
+    name: 'Regular',
+    email: 'regular@prisma.io',
+    password: 'password',
+    role: 'User'
   }
 ]
 

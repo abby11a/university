@@ -27,16 +27,26 @@ NextAuth_SECRET= "Any-String"
 Create the Prisma database using a SQLite Database, seeded in prisma/seed.ts.
 
 ```
-npx prisma migrate dev --name init
 npx prisma migrate dev                                  
 ```
 ### 4. Start the app
+(cd test-app)
 
 ```
 npm run dev
 ```
 
 The app is now running, navigate to [`http://localhost:3000/`](http://localhost:3000/) in your browser to explore its UI.
+To sign into the UI you can use the following details:
+
+For admin view:
+email: admin@prisma.io
+password: password
+
+For regular view:
+email: regular@prisma.io
+password: password
+
 ### 5. Unit test the app
 ```
 npm run test
