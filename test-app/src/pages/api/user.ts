@@ -10,6 +10,7 @@ export default async function handle(
   const result = await prisma.user.create({
     data: {
       ...req.body,
+      role: "User"
     },
   })
   return res.status(201).json(result)
