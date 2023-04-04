@@ -37,7 +37,7 @@ async function update(device: DeviceProps): Promise<void> {
           availability: device.availability,
           location: device.location
         }
-      }),
+      })
     })
     await Router.push('/')
   } catch (error) {
@@ -45,7 +45,7 @@ async function update(device: DeviceProps): Promise<void> {
   }
 }
 
-const Post: React.FC<DeviceProps> = (props) => {
+const SingleDevice: React.FC<DeviceProps> = (props) => {
   const [edit, setEditView] = useState(false)
   const session = useSession();
   // edit device
@@ -88,15 +88,9 @@ const Post: React.FC<DeviceProps> = (props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = (
-    Array.isArray(context.params?.id)
-      ? context.params?.id[0]
-      : context.params?.id
-  )
-  const device = await prisma.device.findUnique({
-    where: { id }
-  })
+  const id = (Array.isArray(context.params?.id) ? context.params?.id[0] : context.params?.id)
+  const device = await prisma.device.findUnique({where: { id }})
   return { props: { ...device } }
 }
 
-export default Post
+export default SingleDevice;
