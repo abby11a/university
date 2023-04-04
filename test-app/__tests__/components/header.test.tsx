@@ -4,6 +4,10 @@ import {Header} from "@/components/Header";
 import client, { signOut } from "next-auth/react";
 import { Session } from "next-auth";
 
+jest.mock("next/router", () => ({
+	push: jest.fn(),
+}));
+
 jest.mock('next-auth/react', () => ({
 	signOut: jest.fn(),
 	signIn: jest.fn(),
@@ -18,7 +22,6 @@ describe("Header", () => {
 		jest.clearAllMocks();
 		window = originalWindow;
 	});
-
 
 	beforeEach(()=>{
 		const mockSession: Session = {
@@ -60,5 +63,13 @@ describe("Header", () => {
 		);
 		expect(getByText("Device List")).toHaveAttribute("data-active", "false");
 		expect(getByText("Create Device")).toHaveAttribute("data-active", "true");
+	});
+
+	it("should go to create page when clicked", () => {
+		const { getByText } = render(<Header />);
+		const createButton = getByText("Create Device");
+
+		fireEvent.click(createButton);
+		expect(window.location.pathname).toEqual("/create")
 	});
 });

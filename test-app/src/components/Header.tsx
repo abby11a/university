@@ -5,7 +5,7 @@ import { signOut } from "next-auth/react";
 import router from "next/router";
 
 export const Header: React.FC = () => {
-	const isActive: (pathname: string) => boolean = (pathname) => window.location.pathname === pathname;
+	const isActive: (pathname: string) => boolean = (pathname) => window.location.pathname === pathname ?? '/';
 
 	return (
 		<nav className={styles.header}>
