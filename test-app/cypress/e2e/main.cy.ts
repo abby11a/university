@@ -1,4 +1,4 @@
-describe('My Next.js App', () => {
+describe('Main page', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/');
 

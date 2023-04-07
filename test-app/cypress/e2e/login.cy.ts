@@ -1,23 +1,24 @@
-describe('My Next.js App', () => {
+// Tests Login and Signup
+describe('Login', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
   });
 
   it('successfully logs in with valid credentials', () => {
-    
+
     // Type in valid email and password
     cy.get('input#email').type('admin@prisma.io')
     cy.get('input#password').type('password')
-    
+
     // Click the submit button
     cy.get('button[type="submit"]').click()
-    
+
     // Assert that we're redirected to the devices page
     cy.url().should('include', '/')
     cy.contains("Devices").should("be.visible");
   })
 
-  
+
   it("should display an error message for incorrect credentials", () => {
     cy.get("form").within(() => {
       cy.get('input#email').type("example@example.com");
@@ -30,7 +31,7 @@ describe('My Next.js App', () => {
     })
   });
 
-  
+
 
   it('successfully sign up with valid credentials', () => {
     cy.contains('a', 'Sign Up').click();
@@ -42,12 +43,28 @@ describe('My Next.js App', () => {
     cy.get('input#email').type('test@prisma.io')
     cy.get('input#name').type('test')
     cy.get('input#password').type('password')
-    
+
     // Click the submit button
     cy.get('button[type="submit"]').click()
-    
+
     // Assert that we're redirected to the login page
     cy.url().should('include', '/')
     cy.contains("Account Login").should("be.visible");
+  })
+
+  it('renders the correct page for non-admin user', () => {
+    // Login as regular user
+    cy.get('input#email').type('regular@prisma.io');
+    cy.get('input#password').type('password');
+    cy.get('button[type="submit"]').click();
+
+
+    cy.url().should('include', '/')
+    cy.get('table').should('exist')
+    cy.get('tbody tr').first().click()
+    cy.url().should('contain', '/single-device/ID1')
+
+    // Check delete button doesn't exist
+    cy.contains('button', 'Delete').should('not.exist');
   })
 })

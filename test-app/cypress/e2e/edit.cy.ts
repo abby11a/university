@@ -1,4 +1,4 @@
-// Tests create, delete and navigate to home
+// Tests edit component
 describe('Edit component', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/');
