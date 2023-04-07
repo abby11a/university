@@ -88,7 +88,7 @@ export const Form: React.FC<Props> = ({ deviceValues, farmValues, onSubmit, idUn
           value={device.farmId}
           onChange={(e) => setDevice({ ...device, farmId: parseInt(e.target.value) })}
         >
-          {farmValues.map((farm) => (
+          {farmValues?.map((farm) => (
             <option key={farm.id} value={farm.id}>
               {farm.id}: Floor {farm.floor}
             </option>
