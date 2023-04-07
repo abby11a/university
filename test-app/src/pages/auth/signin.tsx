@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { getProviders, getSession, signIn } from "next-auth/react";
 import styles from "../../styles/auth.module.css";
+import router from "next/router";
 
 const Signin = () => {
 	const email = useRef("");
@@ -11,7 +12,15 @@ const Signin = () => {
 		signIn("credentials", {
 			email: email.current,
 			password: password.current,
-		});
+			redirect: false,
+		}).then((response) => {
+			if (response?.status != 200) {
+				console.log(JSON.stringify(response));
+				alert("Invalid email or password")
+			} else {
+				router.push("/");
+			}
+		})
 	};
 
 	return (
@@ -34,7 +43,7 @@ const Signin = () => {
 						<input
 							type="password"
 							id="password"
-							onChange={(e) =>(password.current = e.target.value)}
+							onChange={(e) => (password.current = e.target.value)}
 						/>
 					</label>
 					<button
