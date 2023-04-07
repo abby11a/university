@@ -26,6 +26,7 @@ describe('My Next.js App', () => {
         cy.get('input[name="status"]').type('Available');
         cy.get('input[name="chipset"]').type('123');
         cy.get('input[name="location"]').type('1209');
+        cy.get('select').select('1: Floor 3')
         cy.get('input[type="submit"]').click();
 
         // check it returns back to main page
