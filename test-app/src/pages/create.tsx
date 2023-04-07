@@ -4,6 +4,7 @@ import { DeviceProps } from '@/components/Device'
 import Layout from '@/components/Layout';
 import Form from '@/components/Form';
 import styles from "../styles/device.module.css";
+import { GetServerSideProps } from 'next';
 
 /* Create a Device page - localhost:3000/create */
 
@@ -16,10 +17,11 @@ const emptyValues: DeviceProps = {
   status: '',
   availability: undefined,
   location: '',
-  farm: undefined
+  farm: undefined,
+  farmId: 0
 }
 
-const Create = () => {
+const Create: React.FC = (props) => {
   const submitData = async (device: DeviceProps) => {
     try {
       await fetch(`/api/device`, {
@@ -36,9 +38,15 @@ const Create = () => {
   return (
     <Layout>
       <h1 className={styles.heading}>Create Device</h1>
-      <Form onSubmit={submitData} deviceValues={emptyValues} idUnvailable={false}/>
+      <Form onSubmit={submitData} deviceValues={emptyValues} farmValues={props.farms} idUnvailable={false}/>
     </Layout>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const farms = await prisma.farm.findMany();
+  const deviceFarm = {farms: farms}
+  return { props: { ...deviceFarm } }
 }
 
 export default Create

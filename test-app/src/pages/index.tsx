@@ -1,14 +1,15 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import { DeviceProps } from '../components/Device';
+import { DeviceProps, FarmProps } from '../components/Device';
 import prisma from '../lib/prisma';
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import HomePage from '../components/Home';
 import Signin from './auth/signin';
 
 // localhost:3000 (main page)
 export type Props = {
-  devices: DeviceProps[]
+  devices: DeviceProps[],
+  farms: FarmProps[]
 }
 
 const Index: React.FC<Props> = (props) => {
@@ -16,7 +17,7 @@ const Index: React.FC<Props> = (props) => {
 
   // If authenticated return home page
   if (status === "authenticated") {
-    return <HomePage {...props}/>
+    return <HomePage {...props} />
   }
 
   // Else if unauthenticated return login page
@@ -28,10 +29,11 @@ const Index: React.FC<Props> = (props) => {
 }
 
 // Get list of devices from prisma
-export const getServerSideProps: GetServerSideProps = async () => {
-  const devices = await prisma.device.findMany({})
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const devices = await prisma.device.findMany({});
+  const farms = await prisma.device.findMany({});
   return {
-    props: { devices }
+    props: { devices: devices, farms: farms }
   }
 }
 

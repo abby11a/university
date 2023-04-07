@@ -4,11 +4,16 @@ import Layout from '../../components/Layout';
 import Router from 'next/router';
 import prisma from '../../lib/prisma';
 import styles from "../../styles/device.module.css";
-import Device, { DeviceProps } from '@/components/Device';
+import Device, { DeviceProps, FarmProps } from '@/components/Device';
 import Form from '@/components/Form';
 import { TableHeader } from '@/components/TableHeader';
 import { useSession } from 'next-auth/react';
 // View, edit and delete a single device
+
+export type Props = {
+  device: DeviceProps,
+  farms: FarmProps[]
+}
 
 // delete device
 async function destroy(id: string): Promise<void> {
@@ -35,7 +40,8 @@ async function update(device: DeviceProps): Promise<void> {
           chipset: device.chipset,
           status: device.status,
           availability: device.availability,
-          location: device.location
+          location: device.location,
+          farmId: device.farmId
         }
       })
     })
@@ -45,7 +51,7 @@ async function update(device: DeviceProps): Promise<void> {
   }
 }
 
-const SingleDevice: React.FC<DeviceProps> = (props) => {
+const SingleDevice: React.FC<Props> = (props) => {
   const [edit, setEditView] = useState(false)
   const session = useSession();
   // edit device
@@ -53,8 +59,8 @@ const SingleDevice: React.FC<DeviceProps> = (props) => {
     return (
       <Layout>
         <div>
-          <h1 className={styles.heading}>Edit Device {props.id}</h1>
-          <Form deviceValues={props} onSubmit={update} idUnvailable={true} />
+          <h1 className={styles.heading}>Edit Device {props.device.id}</h1>
+          <Form deviceValues={props.device} farmValues={props.farms} onSubmit={update} idUnvailable={true} />
         </div>
       </Layout>
     )
@@ -63,11 +69,11 @@ const SingleDevice: React.FC<DeviceProps> = (props) => {
     return (
       <Layout>
         <div className={styles.singledevice}>
-          <h2 className={styles.heading}>{props.id}</h2>
+          <h2 className={styles.heading}>{props.device.id}</h2>
           <table>
             <TableHeader />
             <tbody>
-              <Device device={props} />
+              <Device device={props.device} />
             </tbody>
           </table>
           <div>
@@ -75,7 +81,7 @@ const SingleDevice: React.FC<DeviceProps> = (props) => {
               Edit
             </button>
             {session.data?.user?.role === 'Admin' && (
-              <button className={styles.twobuttons} onClick={() => destroy(props.id)}>
+              <button className={styles.twobuttons} onClick={() => destroy(props.device.id)}>
                 Delete
               </button>
             )}
@@ -89,8 +95,10 @@ const SingleDevice: React.FC<DeviceProps> = (props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = (Array.isArray(context.params?.id) ? context.params?.id[0] : context.params?.id)
-  const device = await prisma.device.findUnique({where: { id }})
-  return { props: { ...device } }
+  const device = await prisma.device.findUnique({where: { id }});
+  const farms = await prisma.farm.findMany();
+  const deviceFarm = { device: device, farms: farms }
+  return { props: { ...deviceFarm } }
 }
 
 export default SingleDevice;

@@ -2,9 +2,14 @@ import React from 'react'
 import Router from 'next/router'
 import styles from "../styles/device.module.css";
 
+export type FarmProps = {
+  id: number,
+  floor: number
+}
+
 // Datatype for each device
 export type DeviceProps = {
-  id: string,
+  id: string, // primary key
   updatedAt?: Date,
   make: string,
   model: string,
@@ -12,7 +17,8 @@ export type DeviceProps = {
   status: string,
   availability?: Boolean,
   location: string,
-  farm?: {}
+  farmId: number, // foreign key
+  farm?: FarmProps
 }
 
 // Returns a table row of device attributes
@@ -26,6 +32,7 @@ const Device: React.FC<{ device: DeviceProps }> = ({ device }) => {
       <td>{device.status}</td>
       <td>{String(device.availability)}</td>
       <td>{device.location}</td>
+      <td>{JSON.stringify(device.farmId)}</td>
     </tr>
   )
 }

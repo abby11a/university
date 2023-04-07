@@ -3,11 +3,7 @@ import Layout from "./Layout";
 import Device, { DeviceProps } from "./Device";
 import { TableHeader } from "@/components/TableHeader";
 import styles from "../styles/device.module.css";
-
-// localhost:3000 (main page); Returns a table of devices unless unauthenticated
-type Props = {
-	devices: DeviceProps[];
-};
+import { Props } from "@/pages";
 
 // Options to filter the device table with
 const filterOptions = [
@@ -77,7 +73,7 @@ const Home: React.FC<Props> = (props: Props) => {
 							onChange={(e) => setSearch(e.target.value)}
 						/>
 					</div>
-					{devicesTable({ devices: filteredDevices })}
+					{devicesTable({ devices: filteredDevices, farms: props.farms })}
 				</main>
 			</div>
 		</Layout>

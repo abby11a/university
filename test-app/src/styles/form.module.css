@@ -35,6 +35,19 @@
     color: #461e63;
 }
 
+.form select {
+	display: block;
+    background-color: #e7ecff;
+    border-radius: 15px;
+    height: 3em;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    width: 100%;
+    color: #461e63;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
 .heading {
 	text-align: left;
 	margin-top: 1em;
