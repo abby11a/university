@@ -7,19 +7,25 @@ jest.mock('next/router', () => ({
 }))
 
 jest.mock('next-auth/react', () => ({
-    signIn: jest.fn(),
+    signIn: jest.fn().mockResolvedValue({status: 200}),
     getSession: jest.fn(),
     getProviders: jest.fn(),
 }));
 
-describe('Signin', () => {
-    it('should call signIn() with the correct arguments when the correct form is submitted', async () => {
+describe('Signin component', () => {
+    it('should call signIn with the correct arguments when the correct form is submitted', async () => {
+        jest.mock('next-auth/react', () => ({
+            signIn: jest.fn().mockResolvedValue({status: 200}),
+            getSession: jest.fn(),
+            getProviders: jest.fn(),
+        }));
+
         global.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve());
         render(<Signin />);
 
         const emailInput = screen.getByLabelText('Email address');
         const passwordInput = screen.getByLabelText('Password');
-        const loginButton = screen.getByRole('button', { name: "Sign in" });
+        const loginButton = screen.getByRole('button', { name: 'Sign in' });
 
         fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
         fireEvent.change(passwordInput, { target: { value: 'password' } });
@@ -27,7 +33,8 @@ describe('Signin', () => {
 
         expect(signIn).toHaveBeenCalledWith('credentials', {
             email: 'test@example.com',
-            password: 'password'
+            password: 'password',
+            redirect: false
         });
     });
 
@@ -55,6 +62,11 @@ describe('Signin', () => {
         });
 
         it('should return available authentication providers if user is not authenticated', async () => {
+            jest.mock('next-auth/react', () => ({
+                signIn: jest.fn().mockResolvedValue({status: 400}),
+                getSession: jest.fn(),
+                getProviders: jest.fn(),
+            }));
             getSession.mockResolvedValue(null);
             getProviders.mockResolvedValue(mockProviders);
 
