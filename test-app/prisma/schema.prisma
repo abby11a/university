@@ -7,25 +7,24 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-//datasource db {
-//  provider = "mysql"
-//  url = "mysql://root:<password>@localhost:3306/mydatabase"
-//}
+// To migrate to MySQL:
+//  datasource db {
+//    provider = "mysql"
+//    url = "mysql://root:<password>@localhost:3306/mydatabase"
+//  }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
+  id       Int    @id @default(autoincrement())
+  email    String @unique
   name     String
   password String
   role     String
 }
 
 model Farm {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  devices   Device[]
+  id      Int      @id
+  floor   Int
+  devices Device[]
 }
 
 model Device {
@@ -37,6 +36,6 @@ model Device {
   status       String
   availability Boolean   @default(false)
   location     String
-  farm         Farm?     @relation(fields: [farmId], references: [id])
-  farmId       Int?
+  farmId       Int
+  farm         Farm      @relation(fields: [farmId], references: [id])
 }

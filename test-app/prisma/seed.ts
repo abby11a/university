@@ -29,6 +29,17 @@ const userData: Prisma.UserCreateInput[] = [
   }
 ]
 
+const farmData: Prisma.FarmCreateInput[] = [
+  {
+    id: 1,
+    floor: 3
+  },
+  {
+    id: 2,
+    floor: 4
+  }
+]
+
 const deviceData: Prisma.DeviceCreateInput[] = [
     {
         id: "ID1",
@@ -38,33 +49,45 @@ const deviceData: Prisma.DeviceCreateInput[] = [
         status: "Available",
         availability: true,
         location: "1290",
+        farm: {
+          connect: { id: 1 },
+        }
     },
     {
         id: "ID2",
-        make: "Sony",
-        model: "123",
-        chipset: "abc",
+        make: "Apple",
+        model: "234",
+        chipset: "def",
         status: "Available",
         availability: true,
         location: "1291",
+        farm: {
+          connect: { id: 1 },
+        }
     },
     {
         id: "ID3",
-        make: "Sony",
-        model: "123",
-        chipset: "abc",
+        make: "Samsung",
+        model: "345",
+        chipset: "uvw",
         status: "Available",
         availability: true,
-        location: "1293",
+        location: "2345",
+        farm: {
+          connect: { id: 2 },
+        }
     },
     {
         id: "ID4",
         make: "Sony",
-        model: "123",
-        chipset: "abc",
+        model: "456",
+        chipset: "xyz",
         status: "Available",
         availability: true,
-        location: "1294",
+        location: "2346",
+        farm: {
+          connect: { id: 2 },
+        }
     }
 ]
 
@@ -77,11 +100,17 @@ async function main() {
     })
     console.log(`Created user with id: ${user.id}`)
   }
+  for (const f of farmData) {
+    const farm = await prisma.farm.create({
+      data: f,
+    })
+    console.log(`Created farm with id: ${farm.id}`)
+  }
   for (const d of deviceData) {
     const device = await prisma.device.create({
       data: d,
     })
-    console.log(`Created user with id: ${device.id}`)
+    console.log(`Created device with id: ${device.id}`)
   }
   console.log(`Seeding finished.`)
 }
