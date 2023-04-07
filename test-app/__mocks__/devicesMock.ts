@@ -7,6 +7,11 @@ export const devicesMock = [
         status: "Available",
         availability: true,
         location: "1290",
+        farmId: 1,
+        farm: {
+            id: 1,
+            floor: 2
+        }
     },
     {
         id: "ID1",
@@ -16,6 +21,11 @@ export const devicesMock = [
         status: "Available",
         availability: true,
         location: "1290",
+        farmId: 2,
+        farm: {
+            id: 2,
+            floor: 3
+        }
     }
 ]
 
@@ -28,5 +38,17 @@ export const emptyDeviceMock = [
         status: "",
         availability: true,
         location: "",
+        farmId: 0
+    }
+]
+
+export const farmMock = [
+    {
+        id: 1,
+        floor: 3
+    },
+    {
+        id: 2,
+        floor: 4
     }
 ]

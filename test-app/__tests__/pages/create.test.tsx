@@ -9,6 +9,12 @@ jest.mock("next/router", () => ({
 	push: jest.fn(),
 }));
 
+jest.mock("../../src/lib/prisma", () => ({
+    farm: {
+        findMany: jest.fn().mockResolvedValue([{ id: 1, floor: 1 }, { id: 2, floor: 2 }])
+    }
+}))
+
 describe("Create component", () => {
 	const device = devicesMock[0];
 	const session = {
@@ -17,6 +23,12 @@ describe("Create component", () => {
 			email: "john.doe@example.com",
 			role: "Admin",
 		},
+        farms: {
+            farms: [{
+                id: 1,
+                floor: 1
+            }]
+        },
 		expires: "12345",
 	};
 
