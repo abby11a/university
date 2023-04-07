@@ -31,6 +31,7 @@ const SignUp: React.FC = () => {
 					<label className={styles.input}>
 						Name
 						<input
+							id="name"
 							autoFocus
 							onChange={(e) => setName(e.target.value)}
 							placeholder="Name"
@@ -41,6 +42,7 @@ const SignUp: React.FC = () => {
 					<label className={styles.input}>
 						Email Address
 						<input
+							id="email"
 							onChange={(e) => setEmail(e.target.value)}
 							placeholder="Email address"
 							type="text"
@@ -50,6 +52,7 @@ const SignUp: React.FC = () => {
 					<label className={styles.input}>
 						Password
 						<input
+							id="password"
 							onChange={(e) => setPassword(e.target.value)}
 							placeholder="Password"
 							type="password"
