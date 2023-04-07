@@ -40,7 +40,7 @@ describe('Main page', () => {
         // Use the filters
         // Expect there to be 1 item when Location is selected and a location is entered
         cy.get('select').select('Location')
-        cy.get('input[type="text"]').type('1293')
+        cy.get('input[type="text"]').type('1291')
         cy.get('tbody tr').should('have.length', 1)
 
         // Expect there to be 0 items when Location is selected and an invalid location is entered
