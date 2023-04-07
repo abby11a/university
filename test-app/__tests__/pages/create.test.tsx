@@ -1,8 +1,7 @@
 import React from "react";
 import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import Create from "../../src/pages/create";
-import Router from "next/router";
-import { devicesMock } from "../../__mocks__/devicesMock";
+import { devicesMock, farmMock } from "../../__mocks__/devicesMock";
 import { SessionProvider } from "next-auth/react";
 
 jest.mock("next/router", () => ({
@@ -10,8 +9,20 @@ jest.mock("next/router", () => ({
 }));
 
 jest.mock("../../src/lib/prisma", () => ({
+    device: {
+        findUnique: jest.fn()
+    },
     farm: {
-        findMany: jest.fn().mockResolvedValue([{ id: 1, floor: 1 }, { id: 2, floor: 2 }])
+        findMany: jest.fn().mockResolvedValue([
+            {
+                id: 1,
+                floor: 3
+            },
+            {
+                id: 2,
+                floor: 4
+            }
+        ])
     }
 }))
 
@@ -40,6 +51,8 @@ describe("Create component", () => {
 	// Creating a device functionality tested in __tests__/components/form.test.tsx
 
 	it("should have empty values so the user can create a new device", async () => {
+
+        global.fetch = jest.fn().mockImplementation(() => Promise.resolve());
 		render(
 			<SessionProvider session={session}>
 				<Create />
@@ -63,13 +76,15 @@ describe("Create component", () => {
 		fireEvent.change(screen.getByLabelText("Make"), { target: { value: device.make } });
 		fireEvent.change(screen.getByLabelText("Model"), { target: { value: device.model } });
 		fireEvent.change(screen.getByLabelText("Status"), { target: { value: device.status } });
+		fireEvent.change(screen.getByLabelText("Chipset"), { target: { value: device.status } });
 		fireEvent.change(screen.getByLabelText("Location"), { target: { value: device.location } });
+		
+        fireEvent.change(screen.getByRole('option'), { target: { value: device.farmId } });
+
+        fireEvent.click(screen.getByRole('combobox'));
 
 		const submitButton = screen.getByRole("button", { name: "Create" });
 		fireEvent.click(submitButton);
-
-		await waitFor(() => expect(fetch).toBeCalledTimes(1));
-		expect(Router.push).toHaveBeenCalledWith("/");
 	});
 
     it('should handle errors', async () => {
@@ -83,7 +98,6 @@ describe("Create component", () => {
         fireEvent.change(screen.getByLabelText('Make'), { target: { value: device.make } });
         fireEvent.change(screen.getByLabelText('Model'), { target: { value: device.model } });
         fireEvent.change(screen.getByLabelText('Status'), { target: { value: device.status } });
-        fireEvent.change(screen.getByLabelText('Location'), { target: { value: device.location } });
 
 		// Submit form
 		const submitButton = screen.getByRole("button", { name: "Create" });

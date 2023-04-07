@@ -1,5 +1,5 @@
 import React from "react";
-import { DeviceProps, FarmProps } from "./Device";
+import { FarmProps } from "./Device";
 import styles from "../styles/form.module.css";
 
 interface Props {
@@ -8,7 +8,17 @@ interface Props {
   onSubmit: (values: DeviceProps) => void;
   idUnvailable: boolean; // Stop people editing unique ID
 }
-
+export type DeviceProps = {
+  id: string, // primary key
+  updatedAt?: Date,
+  make: string,
+  model: string,
+  chipset?: string,
+  status: string,
+  availability?: Boolean,
+  location: string,
+  farmId: number, // foreign key
+}
 // Form for creating and editing devices
 export const Form: React.FC<Props> = ({ deviceValues, farmValues, onSubmit, idUnvailable }) => {
   const [device, setDevice] = React.useState<DeviceProps>(deviceValues);
@@ -88,6 +98,7 @@ export const Form: React.FC<Props> = ({ deviceValues, farmValues, onSubmit, idUn
           value={device.farmId}
           onChange={(e) => setDevice({ ...device, farmId: parseInt(e.target.value) })}
         >
+          <option value={""}>Select Farm</option>
           {farmValues?.map((farm) => (
             <option key={farm.id} value={farm.id}>
               {farm.id}: Floor {farm.floor}

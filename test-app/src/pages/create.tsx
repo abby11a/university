@@ -32,6 +32,7 @@ const Create: React.FC = (props) => {
       await Router.push('/')
     } catch (error) {
       console.error(error)
+      alert(error)
     }
   }
 

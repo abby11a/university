@@ -37,6 +37,7 @@ describe('Form', () => {
         fireEvent.change(modelInput, { target: { value: newDevice.model } });
         fireEvent.change(statusInput, { target: { value: newDevice.status} });
         fireEvent.change(chipsetInput, { target: { value: newDevice.chipset } });
+        fireEvent.change(chipsetInput, { target: { value: newDevice.chipset } });
         fireEvent.change(locationInput, { target: { value: newDevice.location } });
         fireEvent.click(submitButton);
 
