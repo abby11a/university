@@ -1,6 +1,10 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
 
+/**  
+ * Used to authorise the user
+ * Uses the secret in .env file
+*/
 export const authOptions = {
     secret: process.env.NextAuth_SECRET,
     providers: [

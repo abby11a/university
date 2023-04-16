@@ -18,7 +18,7 @@ const filterOptions = [
 	{ value: "farmId", label: "Farm ID" },
 ];
 
-// Returns the table
+/** Function that returns table of devices */
 const devicesTable = (props: Props) => {
 	if (!props.devices) {
 		console.log(props);
@@ -37,11 +37,12 @@ const devicesTable = (props: Props) => {
 	}
 };
 
+/** Returns a table of devices with a search bar */
 const Home: React.FC<Props> = (props: Props) => {
 	const [search, setSearch] = useState("");
 	const [filterFeature, setFilterFeature] = useState("");
 
-  // Returns list of filtered devices, regardless of case and type
+  	// Returns list of filtered devices, regardless of case and type
 	const filteredDevices = props.devices.filter((item: DeviceProps) => {
 		if (!filterFeature) {
 			return Object.values(item).some((value) => value ? value.toString().toLowerCase().includes(search.toLowerCase()): false);

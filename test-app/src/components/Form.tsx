@@ -6,7 +6,7 @@ interface Props {
   deviceValues: DeviceProps;
   farmValues: FarmProps[];
   onSubmit: (values: DeviceProps) => void;
-  idUnvailable: boolean; // Stop people editing unique ID
+  idUnvailable: boolean; // Stop people editing Primary Key when editing
 }
 export type DeviceProps = {
   id: string, // primary key
@@ -19,7 +19,11 @@ export type DeviceProps = {
   location: string,
   farmId: number, // foreign key
 }
-// Form for creating and editing devices
+
+/** 
+ * Returns a form used for creating and editing devices. 
+ ** The parameters include: values of the device, the available farms, the function to invoke on submit and whether the ID should be an available field 
+*/
 export const Form: React.FC<Props> = ({ deviceValues, farmValues, onSubmit, idUnvailable }) => {
   const [device, setDevice] = React.useState<DeviceProps>(deviceValues);
 

@@ -1,3 +1,7 @@
+/** 
+    The head component for the tables, which is the variables listed in the correct order. 
+    Written as a seperate file for modulisation and reusability.
+**/
 export const TableHeader = () => {
     return (
         <thead>

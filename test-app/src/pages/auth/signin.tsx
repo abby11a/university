@@ -3,6 +3,7 @@ import { getProviders, getSession, signIn } from "next-auth/react";
 import styles from "../../styles/auth.module.css";
 import router from "next/router";
 
+/** Returns a sign in page, which allows users to log in using their credentials which are stored in the SQLite database */
 const Signin = () => {
 	const email = useRef("");
 	const password = useRef("");

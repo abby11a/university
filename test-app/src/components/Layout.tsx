@@ -6,6 +6,7 @@ type Props = {
   children: ReactNode
 }
 
+/** Adds the Header to the page */
 const Layout: React.FC<Props> = (props) => (
   <div>
     <Header />

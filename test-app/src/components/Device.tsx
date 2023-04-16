@@ -21,7 +21,7 @@ export type DeviceProps = {
   farm?: FarmProps
 }
 
-// Returns a table row of device attributes
+/** Returns a table row of device attributes */
 const Device: React.FC<{ device: DeviceProps }> = ({ device }) => {
   return (
     <tr key={device.id} className={styles.Device} onClick={() => Router.push('/single-device/[id]', `/single-device/${device.id}`)}>

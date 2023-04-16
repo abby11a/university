@@ -1,8 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../lib/prisma'
 
-// POST /api/device
-// Required fields in body: id, make, model, status, location
+/**  
+ * POST /api/device
+ * Required fields in body: id, make, model, status, location
+ * Used to create a device
+*/
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse,

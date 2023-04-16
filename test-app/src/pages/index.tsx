@@ -12,6 +12,7 @@ export type Props = {
   farms: FarmProps[]
 }
 
+// Entry point, navigates the user to sign in or home page based on authentication status
 const Index: React.FC<Props> = (props) => {
   const { data: session, status } = useSession();
 

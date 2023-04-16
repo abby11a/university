@@ -1,8 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../../lib/prisma'
 
-// Delete device - /api/device/[id]
-
+/**  
+ * /api/device/[id]
+ * Deletes a device from database if method is DELETE
+*/
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse,

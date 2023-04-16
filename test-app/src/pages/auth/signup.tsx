@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Router from "next/router";
 import styles from "../../styles/auth.module.css";
 
+/** Returns a sign up page with the appropriate fields */
 const SignUp: React.FC = () => {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");

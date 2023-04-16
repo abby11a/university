@@ -8,12 +8,13 @@ import { GetServerSideProps } from 'next';
 
 /* Create a Device page - localhost:3000/create */
 
+// Creating a list of empty values to add as the form vakues
 const emptyValues: DeviceProps = {
   id: '',
   updatedAt: undefined,
   make: '',
   model: '',
-  chipset: undefined,
+  chipset: '',
   status: '',
   availability: undefined,
   location: '',
@@ -21,6 +22,7 @@ const emptyValues: DeviceProps = {
   farmId: 0
 }
 
+// The create function creates a list of form fields that can add a device to the Prisma table
 const Create: React.FC = (props) => {
   const submitData = async (device: DeviceProps) => {
     try {
@@ -44,6 +46,7 @@ const Create: React.FC = (props) => {
   )
 }
 
+// Fetches the farm values from Prisma so that the user can choose the correct farm
 export const getServerSideProps: GetServerSideProps = async () => {
   const farms = await prisma.farm.findMany();
   const deviceFarm = {farms: farms}
