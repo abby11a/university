@@ -10,7 +10,7 @@
 	width: 100vw;
 }
 
-.header .right a[data-active="true"], .header .right a:hover {
+.header .right button[data-active="true"], .header .right a:hover {
 	color: white;
 	background-color: #461e63;
 }
