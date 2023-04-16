@@ -6,9 +6,11 @@ import { SessionProvider } from "next-auth/react";
 import SingleDevice, { getServerSideProps } from "../../src/pages/single-device/[id]";
 import prisma from "../../src/lib/prisma";
 
-jest.mock("next/router", () => ({
-	push: jest.fn(),
-}));
+// Mock the router
+jest.mock('next/router', () => ({
+    useRouter: jest.fn().mockResolvedValue({pathname: "/single-device/ID1"}),
+    push: jest.fn(),
+}))
 
 jest.mock("../../src/lib/prisma", () => ({
     device: {
@@ -41,6 +43,7 @@ const device = devicesMock[0];
 const farms = farmMock;
 const mockProps = {device: device, farms: farms}
 
+// Tests /single-device/[id] file
 describe("Edit/ Delete component", () => {
 	test("render the single device page", () => {
 		render(
@@ -52,6 +55,7 @@ describe("Edit/ Delete component", () => {
 	});
 });
 
+// Tests editing route
 describe ("Edit component", () => {
     it("should have prefilled values so the user can edit a current device", async () => {
         // Render page
@@ -153,6 +157,7 @@ describe ("Edit component", () => {
     });
 });
 
+// Tests delete route
 describe ("Delete component", () => {
     it("should delete the device", async () => {
         // Render page

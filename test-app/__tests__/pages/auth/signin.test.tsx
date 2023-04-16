@@ -12,6 +12,7 @@ jest.mock('next-auth/react', () => ({
     getProviders: jest.fn(),
 }));
 
+// Tests /auth/signin file
 describe('Signin component', () => {
     it('should call signIn with the correct arguments when the correct form is submitted', async () => {
         jest.mock('next-auth/react', () => ({

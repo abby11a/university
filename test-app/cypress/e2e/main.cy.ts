@@ -1,3 +1,4 @@
+// Tests main page table and filtering
 describe('Main page', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/');

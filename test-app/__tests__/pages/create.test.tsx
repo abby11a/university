@@ -4,9 +4,11 @@ import Create from "../../src/pages/create";
 import { devicesMock, farmMock } from "../../__mocks__/devicesMock";
 import { SessionProvider } from "next-auth/react";
 
-jest.mock("next/router", () => ({
-	push: jest.fn(),
-}));
+// Mock the router
+jest.mock('next/router', () => ({
+    useRouter: jest.fn().mockResolvedValue({pathname: "/"}),
+    push: jest.fn(),
+}))
 
 jest.mock("../../src/lib/prisma", () => ({
     device: {
@@ -26,6 +28,7 @@ jest.mock("../../src/lib/prisma", () => ({
     }
 }))
 
+// Tests /create file
 describe("Create component", () => {
 	const device = devicesMock[0];
 	const session = {

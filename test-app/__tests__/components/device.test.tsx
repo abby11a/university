@@ -10,6 +10,7 @@ jest.mock("next/router", () => ({
 
 const device = devicesMock[0];
 
+// Tests components/Device file
 describe("Device", () => {
 	afterEach(() => {
 		jest.clearAllMocks();

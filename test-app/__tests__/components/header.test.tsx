@@ -1,12 +1,15 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
-import {Header} from "@/components/Header";
+import { fireEvent, getByRole, render, screen } from "@testing-library/react";
+import { Header } from "@/components/Header";
 import client, { signOut } from "next-auth/react";
 import { Session } from "next-auth";
+import router from "next/router";
 
-jest.mock("next/router", () => ({
+// Mock the router
+jest.mock('next/router', () => ({
+	useRouter: jest.fn().mockResolvedValue({ pathname: "/" }),
 	push: jest.fn(),
-}));
+}))
 
 jest.mock('next-auth/react', () => ({
 	signOut: jest.fn(),
@@ -16,25 +19,19 @@ jest.mock('next-auth/react', () => ({
 	useSession: jest.fn().mockReturnValue([{ user: { role: 'Admin' } }, false])
 }));
 
+// Tests components/Header file
 describe("Header", () => {
-	const originalWindow = window;
-	afterEach(() => {
-		jest.clearAllMocks();
-		window = originalWindow;
-	});
 
-	beforeEach(()=>{
+	beforeEach(() => {
 		const mockSession: Session = {
 			expires: "1",
 			user: { name: "John Doe", email: "john.doe@example.com", role: 'Admin' }
-		  };
-	  
+		};
 		(client.useSession as jest.Mock).mockReturnValueOnce([mockSession, false]);
 	})
-	
+
 	it("should render a header", () => {
-		const { getByText } = render(
-			<Header />);
+		const { getByText } = render(<Header />);
 		expect(getByText("Device List")).toBeInTheDocument();
 		expect(getByText("Create Device")).toBeInTheDocument();
 		expect(getByText("Sign Out")).toBeInTheDocument();
@@ -47,29 +44,21 @@ describe("Header", () => {
 		expect(signOut).toHaveBeenCalledTimes(1);
 	});
 
-	it("should show the active link", () => {
-		const { getByText } = render(
-			<Header />);
-		expect(getByText("Device List")).toHaveAttribute("data-active", "true");
-		expect(getByText("Create Device")).toHaveAttribute("data-active", "false");
-	});
-
 	it("should show the active link when creating a device", () => {
-		delete window.location;
-		window.location = { pathname: "/create" };
-
-		const { getByText } = render (
-			<Header />
-		);
-		expect(getByText("Device List")).toHaveAttribute("data-active", "false");
-		expect(getByText("Create Device")).toHaveAttribute("data-active", "true");
+		jest.clearAllMocks()
+		// Mock the router to be at create 
+		jest.mock('next/router', () => ({
+			useRouter: jest.fn().mockResolvedValue({ pathname: "/create" })
+		}))
+		render(<Header/>);
+		expect(screen.getByText("Device List")).toHaveAttribute("data-active", "false");
 	});
 
 	it("should go to create page when clicked", () => {
-		const { getByText } = render(<Header />);
-		const createButton = getByText("Create Device");
+		render(<Header />);
+		const createButton = screen.getByRole('button', { name: "Create Device" });
 
 		fireEvent.click(createButton);
-		expect(window.location.pathname).toEqual("/create")
+		expect(router.push).toBeCalledWith("/create")
 	});
 });

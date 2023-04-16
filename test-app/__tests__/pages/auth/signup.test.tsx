@@ -8,6 +8,7 @@ jest.mock('next/router', () => ({
     push: jest.fn(),
 }))
 
+// Tests /auth/signup file
 describe('SignUp', () => {
     it('should submit the form with correct data', async () => {
         global.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve());

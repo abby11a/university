@@ -19,6 +19,7 @@ const newDevice = {
     }
 }
 
+// Tests components/Form file
 describe('Form', () => {
     it('calls onSubmit with the form data when submitted', () => {
         const mockOnSubmit = jest.fn();
