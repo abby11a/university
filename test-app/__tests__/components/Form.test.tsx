@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { devicesMock, emptyDeviceMock } from '../../__mocks__/devicesMock';
+import { devicesMock, emptyDeviceMock, farmMock } from '../../__mocks__/devicesMock';
 import Form from '@/components/Form';
 
 const newDevice = {
@@ -12,12 +12,18 @@ const newDevice = {
     status: "newStatus",
     location: "newLocation",
     availability: true,
+    farmId: 1,
+    farm: {
+        id: 1,
+        floor: 2
+    }
 }
 
+// Tests components/Form file
 describe('Form', () => {
     it('calls onSubmit with the form data when submitted', () => {
         const mockOnSubmit = jest.fn();
-        render(<Form deviceValues={devicesMock[0]} onSubmit={mockOnSubmit} idUnvailable={false} />);
+        render(<Form deviceValues={devicesMock[0]} farmValues={farmMock} onSubmit={mockOnSubmit} idUnvailable={false} />);
 
         const idInput = screen.getByLabelText('ID');
         const makeInput = screen.getByLabelText('Make');
@@ -32,6 +38,7 @@ describe('Form', () => {
         fireEvent.change(modelInput, { target: { value: newDevice.model } });
         fireEvent.change(statusInput, { target: { value: newDevice.status} });
         fireEvent.change(chipsetInput, { target: { value: newDevice.chipset } });
+        fireEvent.change(chipsetInput, { target: { value: newDevice.chipset } });
         fireEvent.change(locationInput, { target: { value: newDevice.location } });
         fireEvent.click(submitButton);
 
@@ -43,13 +50,15 @@ describe('Form', () => {
             status: newDevice.status,
             chipset: newDevice.chipset,
             location: newDevice.location,
-            availability: newDevice.availability
+            availability: newDevice.availability,
+            farm: newDevice.farm,
+            farmId: newDevice.farmId
         });
     });
 
     test('the form cannot be submitted without the required fields', () => {
         const mockOnSubmit = jest.fn();
-        render(<Form deviceValues={emptyDeviceMock[0]} onSubmit={mockOnSubmit} idUnvailable={false} />);
+        render(<Form deviceValues={emptyDeviceMock[0]} farmValues={farmMock} onSubmit={mockOnSubmit} idUnvailable={false} />);
 
         const submitButton = screen.getByRole('button', { name: "Create" });
         fireEvent.click(submitButton);
