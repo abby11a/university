@@ -36,10 +36,9 @@ git clone https://github.com/abby11a/university
 ```
 
 Install npm dependencies:
+make sure your terminal is in this test-app folder (`cd test-app`)
 
 ```
-cd university
-cd test-app
 npm install
 ```
 ### 2. Add an .env file
