@@ -5,6 +5,7 @@ import Layout from '@/components/Layout';
 import Form from '@/components/Form';
 import styles from "../styles/device.module.css";
 import { GetServerSideProps } from 'next';
+import prisma from '@/lib/prisma';
 
 /* Create a Device page - localhost:3000/create */
 

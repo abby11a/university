@@ -13,7 +13,16 @@
   - [Version control](#version-control-and-refactoring)
   - [Usability](#usability)
   - [Data validation](#data-validation)
+  - [Authentication](#authentication)
   - [Data storage](#data-storage)
+  - [Object-Oriented Programming (OOP)](#object-oriented-programming-oop)
+- [Dependencies](#dependencies)
+  - [TypeScript](#typescript)
+  - [NextJS](#nextjs)
+  - [Prisma](#prisma)
+  - [SQLite](#sqlite)
+  - [Cypress](#cypress)
+  - [Jest](#jest)
 - [Layout of the app](#layout-of-web-app)
 - [Using the REST API](#using-the-rest-api)
 
@@ -95,9 +104,47 @@ I ensured to create simple navigation to allow the user to navigate the app easi
 By using typescript, it ensures that entered data is the correct type.
 I added validation on submit buttons to ensure that the required fields are entered.
 
+In the form, I ensured that the user cannot submit it without filling in the required fields. I disabled the button, and added an appropriate message to display on screen.
+In the login component, as well as others, a pop-up is displayed if the credentials that are entered are incorrect
+In the delete section, I ensured to display a confirmation message to confirm the user wanted to delete a device
+
+### Authentication
+I used Next authentication to ensure that the user can log in with the correct credentials. 
+Admins have a different view to regular users, as the delete device button is enabled for them.
+A user can also sign up as a regular user.
+
 ### Data Storage
 The data is stored in a SQLite database using Prisma, this is for the purposes of the Proof of Concept.
 This can later be replaced with a DynamoDB database.
+
+### Object-Oriented Programming (OOP)
+When developing in React, Object-Oriented Programming (OOP) is thought of because of its components and inheritance. However React is a functional framework where each component must contain an output in order to render (Chiarelli, 2018). For this reason, React frameworks are not OOP based and support functional, modular based applications. Therefore, when creating the app I did not use OOP, but I did use an OOP mindset.
+
+Chiarelli, A. (2018) “The functional side of React,” Medium, 31 October. Available at: https://medium.com/@andrea.chiarelli/the-functional-side-of-react-229bdb26d9a6 (Accessed: April 14, 2023). 
+
+## Dependencies
+### TypeScript
+  TypeScript is a language based on JavaScript with the added benefit of type safety
+### NextJS
+  NextJS is a framework that helps the development of web-applications.
+  - Pages
+    NextJS allows React components to render specific URLs, under each file of the folder “pages”, NextJs creates an automatic route based on its name.
+  - Dynamic Routes
+    NextJS can create routes that are dependent on external data, for instance I used pages/single-device/[id]; this is a dynamic route that creates a page based on the value of [id], this variable can be used in the page. Therefore, this [id] is used in the heading for the page.
+  - Server-side Rendering
+    NextJS automatically uses server-side rendering, this means that the information is loaded on the server and then sent to the client. This is used when loading all the pages under the /pages folder. It is also directly referenced by using “getServerSideProps” when data is fetched at request time. This is used in the inventory manager to fetch the Prisma data for the devices and farms at the beginning of the session.
+  - API Routes
+    NextJS helps with API routing, which allows fetching and manipulating data on the server. This is described under [Using the REST API](#using-the-rest-api).
+  - Client-side routing
+    If needed, client-side routing can be implemented
+### Prisma
+  Prisma is a Node.js and TypeScript Object–Relational Mapping (ORM), that helps create and manage databases
+### SQLite
+  I used an SQLite table for the proof of concept, as it will be easy to replace with a DynamoDB database.
+### Cypress
+  Cypress is a testing framework that enables easy E2E testing
+### Jest
+  Jest is a testing framework which I used to implement unit tests
 
 ## Layout of web app
 ### [src/prisma](/prisma/)
@@ -180,10 +227,3 @@ You can also access the REST API of the API server directly. It is running on th
     - Body:
       - `email: String` (required): The email address of the user
       - `name: String` (optional): The name of the user
-
-## Dependencies
-- Typescript
-- NextJS
-- Prisma
-- Cypress
-- Jest

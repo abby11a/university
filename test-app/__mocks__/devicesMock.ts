@@ -14,7 +14,7 @@ export const devicesMock = [
         }
     },
     {
-        id: "ID1",
+        id: "ID2",
         make: "Sony",
         model: "123",
         chipset: "abc",
