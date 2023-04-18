@@ -20,6 +20,24 @@
     font-weight: bold;
 }
 
+.form text {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: #e60000;
+    width: 20em;
+    height: 3em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form .hidden {
+    visibility: hidden;
+}
+.form .visible {
+    visibility: visible;
+}
+
 .form input[type="text"] {
 	background-color: #e7ecff;
     border-radius: 15px;
@@ -74,4 +92,18 @@
 	background-color: #e7ecff;
 	color: #461e63;
 	font-weight: bold;
+    cursor:pointer;
+}
+
+.form .button:disabled {
+	background-color: #461e635a;
+	color: #e7ecff;
+	font-weight: bold;
+}
+
+.form .button:disabled:hover {
+	background-color: #461e635a;
+	color: #e7ecff;
+	font-weight: bold;
+    cursor: not-allowed;
 }
