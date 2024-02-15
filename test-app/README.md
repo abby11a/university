@@ -1,93 +1,60 @@
 # Inventory Manager
-
 ## Table of Contents
-- [Getting started](#getting-started)
-  - [Download dependencies](#1-download-example-and-install-dependencies)
-  - [Add an .env file](#2-add-an-env-file)
-  - [Create and seed the database](#3-create-and-seed-the-database)
-  - [Start the app](#4-start-the-app)
-  - [Unit test the app](#5-unit-test-the-app)
-  - [E2E test the app](#6-e2e-test-the-app)
+- [Getting started](#Install,-Run-and-Test-the-App)
 - [Methods used in the app](#methods-used-in-the-app)
-  - [Modular programming](#modular-programming)
-  - [Version control](#version-control-and-refactoring)
-  - [Usability](#usability)
-  - [Data validation](#data-validation)
-  - [Authentication](#authentication)
-  - [Data storage](#data-storage)
-  - [Object-Oriented Programming (OOP)](#object-oriented-programming-oop)
 - [Dependencies](#dependencies)
-  - [TypeScript](#typescript)
-  - [NextJS](#nextjs)
-  - [Prisma](#prisma)
-  - [SQLite](#sqlite)
-  - [Cypress](#cypress)
-  - [Jest](#jest)
 - [Layout of the app](#layout-of-web-app)
 - [Using the REST API](#using-the-rest-api)
 
-## Getting started
+## Install, Run and Test the App
 ### 1. Download example and install dependencies
-
 Download this example:
+  > git clone https://github.com/abby11a/university
 
-```
-git clone https://github.com/abby11a/university
-```
+Install npm dependencies
+Ensure your terminal is in this test-app folder (`cd test-app`)
+  > npm install
 
-Install npm dependencies:
-make sure your terminal is in this test-app folder (`cd test-app`)
-
-```
-npm install
-```
 ### 2. Add an .env file
 Create a .env file in the test-app folder. In this file be sure to include:
-```
-NextAuth_SECRET= "Any-String"
-```
+  > NextAuth_SECRET= "Any-String"
+
 ### 3. Create and seed the database
-
 Create the Prisma database using a SQLite Database, seeded in prisma/seed.ts.
+  > npx prisma migrate dev                                  
 
-```
-npx prisma migrate dev                                  
-```
 ### 4. Start the app
-(cd test-app)
-
-```
-npm run dev
-```
-
+  > npm run dev
 The app is now running, navigate to [`http://localhost:3000/`](http://localhost:3000/) in your browser to explore its UI.
 To sign into the UI you can use the following details:
 
 For admin view:
-email: admin@prisma.io
-password: password
+  > email: admin@prisma.io
+  > password: password
 
 For regular view:
-email: regular@prisma.io
-password: password
+  > email: regular@prisma.io
+  > password: password
+
 ### 5. Unit test the app
-```
-npm run test
-```
-Runs unit tests on the main components
+  > npm run test
+Runs the unit tests on the components
+
 ### 6. E2E test the app
-```
-npm run cypress
-```
+Run app locally if not already running
+  > npm run dev
+
+Open the Cypress test interface
+  > npm run cypress
+Run each test
 
 ## Methods used in the app
 ### Modular programming
-I made sure each element is seperated into a component, this ensures reuasability of the code. By following modularisation, I can reuse components, like the [app Header](/src/components/Header.tsx), throughout my code.
+Each element is seperated into a component, this ensures reuasability of the code. By following modularisation, I can reuse components, like the [app Header](/src/components/Header.tsx), throughout my code.
 
 I structured my code into [components](/src/components/), [pages](/src/pages/), [APIs](/src/pages/api/), [CSS](/src/styles/), and [testing folders](/__tests__/) to ensure intuative flow and to follow best practices of both naming conventions and modular programming. You can see an outline of the structure under [Layout of web app](#layout-of-web-app).
 
 ### Version Control and Refactoring
-
 I used git to version control the changes to this app, the commits can be found under the git repository: https://github.com/abby11a/university
 
 During the process I prioritised working increments in each commit. I then would revisit the code to refactor and improve it, for instance changing naming conventions, removing unused components, adding tests.
@@ -95,7 +62,6 @@ During the process I prioritised working increments in each commit. I then would
 This follows Agile's principles of: early and continuous delivery of working software, and continuous attention to technical excellence.
 
 ### Usability
-
 I created wireframes for the UX design of the app.
 I ensured to create simple navigation to allow the user to navigate the app easily.
 

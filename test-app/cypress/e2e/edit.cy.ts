@@ -41,3 +41,5 @@ describe('Edit component', () => {
         cy.get('tbody tr').first().should('contain', 'Unavailable')
     })
 })
+
+export {};

@@ -6,6 +6,7 @@ import Form from '@/components/Form';
 import styles from "../styles/device.module.css";
 import { GetServerSideProps } from 'next';
 import prisma from '@/lib/prisma';
+import { Props } from './single-device/[id]';
 
 /* Create a Device page - localhost:3000/create */
 
@@ -24,7 +25,7 @@ const emptyValues: DeviceProps = {
 }
 
 // The create function creates a list of form fields that can add a device to the Prisma table
-const Create: React.FC = (props) => {
+const Create: React.FC<Props> = (props: Props)=> {
   const submitData = async (device: DeviceProps) => {
     try {
       await fetch(`/api/device`, {

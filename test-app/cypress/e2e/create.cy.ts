@@ -63,3 +63,4 @@ describe('My Next.js App', () => {
         cy.get('tbody tr').should('have.length', 4)
     })
 })
+export {};

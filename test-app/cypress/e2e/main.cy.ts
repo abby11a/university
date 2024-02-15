@@ -50,3 +50,4 @@ describe('Main page', () => {
         cy.get('tbody tr').should('have.length', 0)
     })
 })
+export {};

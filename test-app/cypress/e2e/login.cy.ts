@@ -68,3 +68,4 @@ describe('Login', () => {
     cy.contains('button', 'Delete').should('not.exist');
   })
 })
+export {};
