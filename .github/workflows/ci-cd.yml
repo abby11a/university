@@ -46,15 +46,15 @@ jobs:
       env:
         ECR_REGISTRY: ${{ secrets.AWS_ACCOUNT }}.dkr.ecr.eu-west-1.amazonaws.com
         ECR_REPOSITORY: ${{ secrets.ECR_REPO }}
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: latest
       run: |
         cd test-app
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }} .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
     # Deploy CDK Stack
-    - name: Deploy infrastructure with CDK
-      run: |
-        cd inventory-manager-cdk
-        npm install
-        npx cdk deploy --require-approval never --context imageTag=${{ github.sha }}
+    #- name: Deploy infrastructure with CDK
+    #  run: |
+    #    cd inventory-manager-cdk
+    #    npm install
+    #    npx cdk deploy --require-approval never --context imageTag=latest
