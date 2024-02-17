@@ -27,7 +27,7 @@ jobs:
     - name: Build, tag, and push image
       env:
         ECR_REGISTRY: ${{ secrets.AWS_ACCOUNT }}.dkr.ecr.eu-west-1.amazonaws.com
-        ECR_REPOSITORY: InventoryManagerEcrRepo
+        ECR_REPOSITORY: ${{ secrets.ECR_REPO }}
         IMAGE_TAG: ${{ github.sha }}
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }} ./test-app
