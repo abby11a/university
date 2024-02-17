@@ -6,7 +6,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
  * Uses the secret in .env file
 */
 export const authOptions = {
-    secret: process.env.NextAuth_SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -36,6 +36,7 @@ export const authOptions = {
                     }),
                 });
                 const user = await res.json();
+                console.log(`RESULT: ${JSON.stringify(user)}`)
                 if (res.ok && user) {
                     return user;
                 } else return null;
