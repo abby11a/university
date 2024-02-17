@@ -12,6 +12,30 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    # Setup Node.js environment
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14' # Specify your Node.js version
+
+    # Install dependencies
+    - name: Install dependencies
+      run: |
+        cd test-app
+        npm install
+
+    # Generate Prisma client
+    - name: Generate Prisma Client
+      run: |
+        cd test-app
+        npx prisma generate
+
+    # Optionally, run Prisma seed script if you have one
+    - name: Run Prisma Seed Script
+      run: |
+        cd test-app
+        npx prisma db seed
+
     # Login to Amazon ECR
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -30,7 +54,8 @@ jobs:
         ECR_REPOSITORY: ${{ secrets.ECR_REPO }}
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }} ./test-app
+        cd test-app
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }} .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
 
     # Deploy CDK Stack
