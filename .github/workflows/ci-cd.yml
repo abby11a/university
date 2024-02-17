@@ -30,12 +30,6 @@ jobs:
         cd test-app
         npx prisma generate
 
-    # Optionally, run Prisma seed script if you have one
-    - name: Run Prisma Seed Script
-      run: |
-        cd test-app
-        npx prisma db seed
-
     # Login to Amazon ECR
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
