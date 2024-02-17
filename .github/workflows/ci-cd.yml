@@ -55,6 +55,6 @@ jobs:
     # Deploy CDK Stack
     - name: Deploy infrastructure with CDK
       run: |
-        cd test-app-cdk
+        cd inventory-manager-cdk
         npm install
         npx cdk deploy --require-approval never --context imageTag=${{ github.sha }}
