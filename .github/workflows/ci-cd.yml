@@ -28,7 +28,6 @@ jobs:
     - name: Generate Prisma Client
       run: |
         cd test-app
-        npx prisma db seed
         npx prisma generate
 
     # Build, tag, and push the Docker image to Amazon ECR
