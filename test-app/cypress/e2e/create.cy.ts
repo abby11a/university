@@ -4,7 +4,7 @@ describe('My Next.js App', () => {
         cy.visit('http://localhost:3000/');
 
         // Login
-        cy.get('input#email').type('admin@prisma.io');
+        cy.get('input#email').type('admin@prisma.com');
         cy.get('input#password').type('password');
         cy.get('button[type="submit"]').click();
 

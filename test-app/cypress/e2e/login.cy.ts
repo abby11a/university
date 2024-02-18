@@ -7,7 +7,7 @@ describe('Login', () => {
   it('successfully logs in with valid credentials', () => {
 
     // Type in valid email and password
-    cy.get('input#email').type('admin@prisma.io')
+    cy.get('input#email').type('admin@prisma.com')
     cy.get('input#password').type('password')
 
     // Click the submit button

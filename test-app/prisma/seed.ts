@@ -95,20 +95,26 @@ const deviceData: Prisma.DeviceCreateInput[] = [
 async function main() {
   console.log(`Start seeding ...`)
   for (const u of userData) {
-    const user = await prisma.user.create({
-      data: u,
+    const user = await prisma.user.upsert({
+      where: {email: u.email},
+      update: {},
+      create: u
     })
     console.log(`Created user with id: ${user.id}`)
   }
   for (const f of farmData) {
-    const farm = await prisma.farm.create({
-      data: f,
+    const farm = await prisma.farm.upsert({
+      where: {id: f.id},
+      update: {},
+      create: f
     })
     console.log(`Created farm with id: ${farm.id}`)
   }
   for (const d of deviceData) {
-    const device = await prisma.device.create({
-      data: d,
+    const device = await prisma.device.upsert({
+      where: {id: d.id},
+      update: {},
+      create: d
     })
     console.log(`Created device with id: ${device.id}`)
   }
