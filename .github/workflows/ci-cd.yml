@@ -28,14 +28,15 @@ jobs:
     - name: Generate Prisma Client
       run: |
         cd test-app
+        npx prisma db seed
         npx prisma generate
 
     # Build, tag, and push the Docker image to Amazon ECR
     - name: Build the project
       run: npm run build
-      
+
     - name: Start the application
-      run: npm run start &
+      run: npm run dev &
     - name: Wait for the server to be ready
       run: |
         until $(curl --output /dev/null --silent --head --fail http://localhost:3000); do
@@ -44,5 +45,3 @@ jobs:
         done
     - name: Run Cypress E2E Tests
       run: npm run test:e2e
-
-    # Deploy CDK Stack
