@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "test:e2e": "cypress run"
   },
   "dependencies": {
     "next": "13.2.4",
