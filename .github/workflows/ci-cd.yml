@@ -1,4 +1,4 @@
-name: Build and Deploy App and Infrastructure
+name: Build, Deploy and Test App
 
 on:
   push:
@@ -33,17 +33,24 @@ jobs:
 
     # Build, tag, and push the Docker image to Amazon ECR
     - name: Build the project
-      run: npm run build
+      run: |
+        cd test-app
+        npm run build
       
     - name: Start the application
-      run: npm run start &
+      run: |
+        cd test-app
+        npm run start &
     - name: Wait for the server to be ready
       run: |
+        cd test-app
         until $(curl --output /dev/null --silent --head --fail http://localhost:3000); do
           printf '.'
           sleep 1
         done
     - name: Run Cypress E2E Tests
-      run: npm run test:e2e
+      run: |
+        cd test-app
+        npm run test:e2e
 
     # Deploy CDK Stack
