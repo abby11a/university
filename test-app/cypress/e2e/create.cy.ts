@@ -29,6 +29,8 @@ describe('My Next.js App', () => {
         cy.get('select').select('1: Floor 3')
         cy.get('input[type="submit"]').click();
 
+        cy.wait(500); // Wait for half a second
+
         // check it returns back to main page
         cy.get('table').should('exist')
         // check it's added a device

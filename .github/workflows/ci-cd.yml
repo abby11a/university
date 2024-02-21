@@ -1,4 +1,4 @@
-name: Build, Deploy and Test App
+name: Build, Test and Deploy App
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
-    name: Build and Deploy
+  build-and-test:
+    name: Build and Test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -31,26 +31,29 @@ jobs:
         npx prisma db seed
         npx prisma generate
 
-    # Build, tag, and push the Docker image to Amazon ECR
+    # Build the project
     - name: Build the project
       run: |
         cd test-app
         npm run build
-      
-    - name: Start the application
+        
+    # Run the tests
+    - name: Run Unit Tests
       run: |
         cd test-app
-        npm run start &
-    - name: Wait for the server to be ready
-      run: |
-        cd test-app
-        until $(curl --output /dev/null --silent --head --fail http://localhost:3000); do
-          printf '.'
-          sleep 1
-        done
-    - name: Run Cypress E2E Tests
-      run: |
-        cd test-app
-        npm run test:e2e
+        npm test
+
+    - name: Run Cypress Tests
+      uses: cypress-io/github-action@v2
+      with:
+        start: npm start # Command to start your server, adjust accordingly
+        wait-on: 'http://localhost:3000' # Adjust this URL to where your app is served
+        wait-on-timeout: 60 # Optional: timeout in seconds for wait-on
 
     # Deploy CDK Stack
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Vercel
+        run: curl -X POST ${{ secrets.VERCEL_DEPLOY_HOOK }}
