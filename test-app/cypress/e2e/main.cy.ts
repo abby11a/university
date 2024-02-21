@@ -25,12 +25,13 @@ describe('Main page', () => {
 
     it('navigates to the correct page when a device is clicked', () => {
         // check that clicking on a device item navigates to the correct page
-        cy.get('tbody tr').first().click()
+        cy.get('tbody tr').contains('ID1').click()
         cy.url().should('contain', '/single-device/ID1')
     })
 
     it('uses the search bar correctly', () => {
         // check that search bar filters the table correctly
+        cy.wait(500); // Wait for half a second
         cy.get('input[type="text"]').type('ID1')
         cy.get('tbody tr').should('have.length', 1)
         cy.get('tbody tr td').contains('ID1')
