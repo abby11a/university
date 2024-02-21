@@ -47,7 +47,7 @@ jobs:
     - name: Start the application
       run: |
         cd test-app
-        npm run start &
+        npm run dev &
     - name: Wait for the server to be ready
       run: |
         cd test-app
