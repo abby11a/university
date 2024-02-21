@@ -110,7 +110,7 @@ export const Form: React.FC<Props> = ({ deviceValues, farmValues, onSubmit, idUn
           ))}
         </select>
       </label>
-      <text className={(!device.id || !device.make || !device.model || !device.status) ? styles.visable : styles.hidden}>Please fill out all required fields</text>
+      <p className={(!device.id || !device.make || !device.model || !device.status) ? styles.visable : styles.hidden}>Please fill out all required fields</p>
       <input
         className={styles.button}
         disabled={!device.id || !device.make || !device.model || !device.status}

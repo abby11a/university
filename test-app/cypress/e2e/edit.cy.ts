@@ -4,12 +4,12 @@ describe('Edit component', () => {
         cy.visit('http://localhost:3000/');
 
         // Login
-        cy.get('input#email').type('admin@prisma.com');
+        cy.get('input#email').type('admin@prisma.io');
         cy.get('input#password').type('password');
         cy.get('button[type="submit"]').click();
 
         // Single device view
-        cy.get('tbody tr').first().click()
+        cy.get('tbody tr').contains('ID1').click()
         cy.url().should('contain', '/single-device/ID1')
 
         // Edit device view
@@ -37,9 +37,13 @@ describe('Edit component', () => {
         // check it returns back to main page
         cy.get('table').should('exist')
         // check it's edited a device
-        cy.get('tbody tr').first().should('contain', 'Apple')
-        cy.get('tbody tr').first().should('contain', 'Unavailable')
+        cy.get('tbody tr').contains('td', 'ID1').parent('tr').within(() => {
+            cy.get('td').should('contain', 'Apple');
+        });
+        cy.get('tbody tr').contains('td', 'ID1').parent('tr').within(() => {
+            cy.get('td').should('contain', 'Unavailable');
+        });
     })
 })
 
-export {};
+export { };

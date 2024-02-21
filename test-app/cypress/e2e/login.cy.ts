@@ -7,7 +7,7 @@ describe('Login', () => {
   it('successfully logs in with valid credentials', () => {
 
     // Type in valid email and password
-    cy.get('input#email').type('admin@prisma.com')
+    cy.get('input#email').type('admin@prisma.io')
     cy.get('input#password').type('password')
 
     // Click the submit button
@@ -35,10 +35,11 @@ describe('Login', () => {
 
   it('successfully sign up with valid credentials', () => {
     cy.contains('a', 'Sign Up').click();
+    cy.wait(500); // Wait for half a second
 
     // Renders sign up page
     cy.contains("Sign Up").should("be.visible");
-
+    
     // Type in valid email and password
     cy.get('input#email').type('test@prisma.io')
     cy.get('input#name').type('test')
@@ -61,7 +62,7 @@ describe('Login', () => {
 
     cy.url().should('include', '/')
     cy.get('table').should('exist')
-    cy.get('tbody tr').first().click()
+    cy.get('tbody tr').contains('ID1').click()
     cy.url().should('contain', '/single-device/ID1')
 
     // Check delete button doesn't exist

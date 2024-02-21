@@ -24,7 +24,7 @@ export type DeviceProps = {
 /** Returns a table row of device attributes */
 const Device: React.FC<{ device: DeviceProps }> = ({ device }) => {
   return (
-    <tr key={device.id} className={styles.Device} onClick={() => Router.push('/single-device/[id]', `/single-device/${device.id}`)}>
+    <tr key={device.id} className={styles.Device} data-testid={"device"} onClick={() => Router.push('/single-device/[id]', `/single-device/${device.id}`)}>
       <td>{device.id}</td>
       <td>{device.make}</td>
       <td>{device.model}</td>

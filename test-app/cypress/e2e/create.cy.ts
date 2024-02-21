@@ -4,7 +4,7 @@ describe('My Next.js App', () => {
         cy.visit('http://localhost:3000/');
 
         // Login
-        cy.get('input#email').type('admin@prisma.com');
+        cy.get('input#email').type('admin@prisma.io');
         cy.get('input#password').type('password');
         cy.get('button[type="submit"]').click();
 
@@ -48,7 +48,7 @@ describe('My Next.js App', () => {
         cy.contains('a', 'Device List').click()
 
         // Get individual device we just created
-        cy.get('tbody tr').last().click()
+        cy.get('tbody tr').contains('ID5').click()
 
         // Click delete
         cy.contains('button', 'Delete').click()

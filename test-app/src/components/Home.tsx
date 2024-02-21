@@ -60,6 +60,7 @@ const Home: React.FC<Props> = (props: Props) => {
 							id="filter"
 							value={filterFeature}
 							onChange={(e) => setFilterFeature(e.target.value)}
+							data-testid={"filter"} 
 						>
 							{filterOptions.map((option) => (
 								<option key={option.value} value={option.value}>

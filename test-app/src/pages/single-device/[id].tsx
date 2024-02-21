@@ -80,7 +80,7 @@ const SingleDevice: React.FC<Props> = (props) => {
             <button className={styles.twobuttons} onClick={() => setEditView(true)}>
               Edit
             </button>
-            {session.data?.user?.name === 'Admin' && (
+            {session.data?.user?.role === 'Admin' && (
               <button className={styles.twobuttons} onClick={() => destroy(props.device.id)}>
                 Delete
               </button>
