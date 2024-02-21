@@ -37,20 +37,30 @@ jobs:
         cd test-app
         npm run build
         
-    # Run the tests
+    # Run unit tests
     - name: Run Unit Tests
       run: |
         cd test-app
         npm test
 
-    - name: Run Cypress Tests
-      uses: cypress-io/github-action@v2
-      with:
-        start: npm start # Command to start your server, adjust accordingly
-        wait-on: 'http://localhost:3000' # Adjust this URL to where your app is served
-        wait-on-timeout: 60 # Optional: timeout in seconds for wait-on
-
-    # Deploy CDK Stack
+    # Run E2E tests
+    - name: Start the application
+      run: |
+        cd test-app
+        npm run start &
+    - name: Wait for the server to be ready
+      run: |
+        cd test-app
+        until $(curl --output /dev/null --silent --head --fail http://localhost:3000); do
+          printf '.'
+          sleep 1
+        done
+    - name: Run Cypress E2E Tests
+      run: |
+        cd test-app
+        npm run test:e2e
+  
+  # Deploy CDK Stack
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
