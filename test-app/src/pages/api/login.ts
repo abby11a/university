@@ -13,7 +13,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(405).send({ message: 'Only POST requests allowed' });
             return;
         }
-        console.log(req.body)
         const user = await prisma.user.findFirst({
             where: {
                 email: req.body.email,

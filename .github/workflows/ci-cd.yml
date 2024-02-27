@@ -59,9 +59,10 @@ jobs:
       run: |
         cd test-app
         npm run test:e2e
-  
-  # Deploy CDK Stack
+
+  # Deploy the stack to Vercel
   deploy:
+    name: Deploy
     needs: build-and-test
     runs-on: ubuntu-latest
     steps:

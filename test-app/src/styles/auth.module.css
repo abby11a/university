@@ -57,6 +57,12 @@
     box-shadow: 5px 8px #3a20751f;
 }
 
+.button:disabled,
+.button[disabled]{
+  background-color: #cccccc;
+  color: #666666;
+}
+
 .option {
 	display: block;
     text-align: center;
