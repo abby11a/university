@@ -28,6 +28,9 @@ export const authOptions = {
                 const baseUrl =  process.env.NEXTAUTH_URL ?? "http://localhost:3000";
                 const apiUrl = `${baseUrl}/api/login`;
 
+                console.log(baseUrl);
+                console.log(apiUrl);
+
                 const res = await fetch(apiUrl, {
                     method: "POST",
                     headers: {
