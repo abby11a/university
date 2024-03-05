@@ -19,11 +19,14 @@ Ensure your terminal is in this test-app folder (`cd test-app`)
 Create a .env file in the test-app folder. In this file be sure to include:
   > NextAuth_SECRET= "Any-String"
 
-### 3. Create and seed the database
+### 3. Generate the database
 Create the Prisma database using a SQLite Database, seeded in prisma/seed.ts.
-  > npx prisma migrate dev                                  
+  > npx prisma generate                              
 
-### 4. Start the app
+### 4. Build the package
+  > npm run build
+
+### 5. Start the app
   > npm run dev
 The app is now running, navigate to [`http://localhost:3000/`](http://localhost:3000/) in your browser to explore its UI.
 To sign into the UI you can use the following details:
@@ -36,11 +39,11 @@ For regular view:
   > email: regular@prisma.io
   > password: password
 
-### 5. Unit test the app
+### 6. Unit test the app
   > npm run test
 Runs the unit tests on the components
 
-### 6. E2E test the app
+### 7. E2E test the app
 Run app locally if not already running
   > npm run dev
 

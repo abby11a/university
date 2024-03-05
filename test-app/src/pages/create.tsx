@@ -7,6 +7,7 @@ import styles from "../styles/device.module.css";
 import { GetServerSideProps } from 'next';
 import prisma from '@/lib/prisma';
 import { Props } from './single-device/[id]';
+import { getSession } from 'next-auth/react';
 
 /* Create a Device page - localhost:3000/create */
 
@@ -49,7 +50,16 @@ const Create: React.FC<Props> = (props: Props)=> {
 }
 
 // Fetches the farm values from Prisma so that the user can choose the correct farm
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
   const farms = await prisma.farm.findMany();
   const deviceFarm = {farms: farms}
   return { props: { ...deviceFarm } }

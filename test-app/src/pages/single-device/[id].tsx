@@ -7,7 +7,7 @@ import styles from "../../styles/device.module.css";
 import Device, { DeviceProps, FarmProps } from '@/components/Device';
 import Form from '@/components/Form';
 import { TableHeader } from '@/components/TableHeader';
-import { useSession } from 'next-auth/react';
+import { useSession, getSession } from 'next-auth/react';
 // View, edit and delete a single device
 
 export type Props = {
@@ -94,6 +94,17 @@ const SingleDevice: React.FC<Props> = (props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
   const id = (Array.isArray(context.params?.id) ? context.params?.id[0] : context.params?.id)
   const device = await prisma.device.findUnique({where: { id }});
   const farms = await prisma.farm.findMany();

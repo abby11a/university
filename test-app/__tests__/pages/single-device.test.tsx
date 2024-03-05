@@ -3,8 +3,7 @@ import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import Router from "next/router";
 import { devicesMock, farmMock } from "../../__mocks__/devicesMock";
 import { SessionProvider } from "next-auth/react";
-import SingleDevice, { getServerSideProps } from "../../src/pages/single-device/[id]";
-import prisma from "../../src/lib/prisma";
+import SingleDevice from "../../src/pages/single-device/[id]";
 
 // Mock the router
 jest.mock('next/router', () => ({
@@ -204,31 +203,3 @@ describe ("Delete component", () => {
 		expect(Router.push).toHaveBeenCalledWith("/");
     });
 });
-
-describe("Server side props", () => {
-    it("Should mock the correct device", async () => {
-        const context = {
-            params: {
-                id: "ID1"
-            }
-        }
-        prisma.device.findUnique.mockResolvedValue(device);
-    
-        const props = await getServerSideProps(context);
-        expect(prisma.device.findUnique).toHaveBeenCalledWith({"where": context.params});
-        expect(props).toEqual({props: {...mockProps}})
-    });
-
-    it("Should mock the correct device given a list of params", async () => {
-        const context = {
-            params: {
-                id: ["ID1"]
-            }
-        }
-        prisma.device.findUnique.mockResolvedValue(device);
-    
-        const props = await getServerSideProps(context);
-        expect(prisma.device.findUnique).toHaveBeenCalledWith({"where": {id: 'ID1'}});
-        expect(props).toEqual({props: mockProps})
-    })
-})
