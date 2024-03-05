@@ -110,8 +110,8 @@ Chiarelli, A. (2018) “The functional side of React,” Medium, 31 October. Ava
     If needed, client-side routing can be implemented
 ### Prisma
   Prisma is a Node.js and TypeScript Object–Relational Mapping (ORM), that helps create and manage databases
-### SQLite
-  I used an SQLite table for the proof of concept, as it will be easy to replace with a DynamoDB database.
+### Postgres
+  I used Vercel's postgres database in order to intgerate a database to use.
 ### Cypress
   Cypress is a testing framework that enables easy E2E testing
 ### Jest
@@ -157,7 +157,6 @@ This code was built upon a NextJS fullstack app example, which shows how to impl
 
 
 ## Using the REST API
-
 You can also access the REST API of the API server directly. It is running on the same host machine and port and can be accessed via the `/api` route (in this case that is `localhost:3000/api/`, so you can e.g. reach the API with [`localhost:3000/api/device`](http://localhost:3000/api/device)).
 
 - GET
