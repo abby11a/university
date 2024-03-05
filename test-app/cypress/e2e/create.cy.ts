@@ -38,6 +38,7 @@ describe('My Next.js App', () => {
     })
 
     it('should not be able to submit the form if fields are not completed', () => {
+        cy.wait(500); // Wait for half a second
         cy.get('input[name="id"]').type('ID5');
         cy.get('input[name="make"]').type('Sony');
         cy.get('input[name="model"]').type('123');

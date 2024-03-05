@@ -46,6 +46,7 @@ describe('Login', () => {
     cy.get('input#name').type('test')
     cy.get('input#password').type('password')
 
+    cy.wait(500); // Wait for half a second
     // Click the submit button
     cy.get('button[type="submit"]').click()
 
