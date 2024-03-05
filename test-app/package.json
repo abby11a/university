@@ -9,7 +9,11 @@
     "lint": "next lint",
     "test": "jest",
     "cypress": "cypress open",
-    "test:e2e": "cypress run"
+    "test:e2e": "cypress run",
+    "prisma:generate": "prisma generate",
+    "prisma:seed": "ts-node prisma/seed.ts",
+    "prisma:push": "prisma db push",
+    "vercel-build": "npm run prisma:generate && npm run prisma:push && npm run prisma:seed && npm run build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
