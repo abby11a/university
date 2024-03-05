@@ -39,6 +39,7 @@ describe('Login', () => {
 
     // Renders sign up page
     cy.contains("Sign Up").should("be.visible");
+    cy.wait(500); // Wait for half a second
     
     // Type in valid email and password
     cy.get('input#email').type('test@prisma.io')

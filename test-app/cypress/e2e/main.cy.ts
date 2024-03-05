@@ -37,6 +37,7 @@ describe('Main page', () => {
         cy.get('tbody tr td').contains('ID1')
 
         cy.get('input[type="text"]').clear()
+        cy.wait(500); // Wait for half a second
         cy.get('tbody tr').should('have.length', 4)
 
         // Use the filters
