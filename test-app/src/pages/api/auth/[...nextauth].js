@@ -25,7 +25,7 @@ export const authOptions = {
 
             async authorize(credentials, req) {
                 const { email, password } = credentials;
-                const baseUrl =  process.env.NEXTAUTH_URL ?? "http://localhost:3000";
+                const baseUrl =  process.env.NEXTAUTH_URL ? `https://${process.env.NEXTAUTH_URL}` : "http://localhost:3000";
                 const apiUrl = `${baseUrl}/api/login`;
 
                 console.log(baseUrl);
