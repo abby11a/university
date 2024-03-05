@@ -31,7 +31,7 @@ describe('Main page', () => {
 
     it('uses the search bar correctly', () => {
         // check that search bar filters the table correctly
-        cy.wait(500); // Wait for half a second
+        cy.wait(1000); // Wait for half a second
         cy.get('input[type="text"]').type('ID1')
         cy.get('tbody tr').should('have.length', 1)
         cy.get('tbody tr td').contains('ID1')

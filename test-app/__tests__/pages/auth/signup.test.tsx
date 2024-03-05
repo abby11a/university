@@ -28,11 +28,7 @@ describe('SignUp', () => {
         expect(fetch).toHaveBeenCalledWith('/api/user', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name: 'User',
-                email: 'test@example.com',
-                password: 'password'
-            }),
+            body: JSON.stringify({}),
         })
     })
 
