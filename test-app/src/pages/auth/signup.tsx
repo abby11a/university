@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Router from "next/router";
 import styles from "../../styles/auth.module.css";
+import { body } from "express-validator";
 
 /** Returns a sign up page with the appropriate fields */
 const SignUp: React.FC = () => {
@@ -11,11 +12,15 @@ const SignUp: React.FC = () => {
 	const submitData = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		try {
-			const body = { name, email, password };
+			const request = { 
+				name: body(name).trim().escape(),
+				email: body(email).isEmail().normalizeEmail(),
+				password: body(password).trim().escape(),
+			};
 			await fetch(`/api/user`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(body),
+				body: JSON.stringify(request),
 			});
 			await Router.push("/");
 		} catch (error) {
