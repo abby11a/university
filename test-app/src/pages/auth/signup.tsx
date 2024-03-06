@@ -12,16 +12,12 @@ const SignUp: React.FC = () => {
 	const submitData = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		try {
-			const request = { 
-				name: body(name).trim().escape(),
-				email: body(email).isEmail().normalizeEmail(),
-				password: body(password).trim().escape(),
-			};
-			await fetch(`/api/user`, {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(request),
-			});
+			const user = { name, email, password };
+      await fetch(`/api/user`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
 			await Router.push("/");
 		} catch (error) {
 			console.error(error);
