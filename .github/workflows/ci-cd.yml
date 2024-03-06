@@ -24,6 +24,13 @@ jobs:
         cd test-app
         npm install
 
+    # Security Audit
+    - name: Run npm audit
+      run: |
+        cd test-app
+        npm audit --production --audit-level=moderate
+      continue-on-error: false
+
     # Generate Prisma client
     - name: Generate Prisma Client
       run: |
