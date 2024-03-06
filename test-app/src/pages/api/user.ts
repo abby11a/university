@@ -1,20 +1,29 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '../../lib/prisma'
+import type { NextApiRequest, NextApiResponse } from 'next';
+import prisma from '../../lib/prisma';
+import bcrypt from 'bcryptjs';
 
-/**  
- * POST /api/user
- * Required fields in body: name, email, password
- * Adds an entry to the user database, used to sign a user up
-*/
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const result = await prisma.user.create({
-    data: {
-      ...req.body,
-      role: "User"
-    },
-  })
-  return res.status(201).json(result)
+  const { name, email, password } = req.body;
+  
+  // Hash the password before storing it in the database
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(password, salt);
+
+  try {
+    const result = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        role: "User",
+      },
+    });
+    return res.status(201).json({ name, email, role: result.role });
+  } catch (error) {
+    console.error('Signup error:', error);
+    return res.status(500).json({ message: 'Error creating user' });
+  }
 }
