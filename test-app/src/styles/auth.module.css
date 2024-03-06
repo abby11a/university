@@ -1,48 +1,49 @@
 
+
 .signin {
-	position: relative;
-	border-radius: 20px;
-	border-color: transparent;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 6%;
-	padding: 2em;
-	box-shadow: 5px 8px #3a20751f;
-	height: 120%;
-	width: 55%;
-	background-color: #a8b2e6;
-	bottom: 50%;
+  position: relative;
+  border-radius: 20px;
+  border-color: transparent;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 6%;
+  padding: 2em;
+  box-shadow: 5px 8px #3a20751f;
+  height: 120%;
+  width: 55%;
+  background-color: #a8b2e6;
+  bottom: 50%;
 }
 
 .signin h2{
     text-align: center;
-	color: #461e63;
+  color: #461e63;
     font-size: 2em;
     font-weight: 400;
 }
 
 .signin label {
-	display: block;
-	font-size: x-large;
-	margin-bottom: 2em;
-	margin-left: 1em;
-	color: #461e63;
-	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-		"Lucida Sans", Arial, sans-serif;
-	letter-spacing: 1px;
+  display: block;
+  font-size: x-large;
+  margin-bottom: 2em;
+  margin-left: 1em;
+  color: #461e63;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  letter-spacing: 1px;
 }
 
 .h1 {
     text-align: left;
     margin-top: 1em;
     margin-left: 1em;
-	color: #461e63;
+  color: #461e63;
     font-size: 2em;
     font-weight: 400;
 }
 
 .button {
-	display: block;
+  display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 4%;
@@ -64,7 +65,7 @@
 }
 
 .option {
-	display: block;
+  display: block;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -75,29 +76,29 @@
 }
 
 .option:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .input {
-	display: block;
-	font-size: x-large;
-	margin-bottom: 1em;
-	margin-left: 1em;
-	margin-right: 1em;
-	color: #461e63;
-	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-	letter-spacing: 1px;
+  display: block;
+  font-size: x-large;
+  margin-bottom: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+  color: #461e63;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  letter-spacing: 1px;
 }
 
 .input input {
-	display: block;
-	position: relative;
-	border-radius: 10px;
-	border-color: transparent;
-	box-shadow: 5px 8px #3a20751f;
-	height: 50px;
-	width: 100%;
-	margin-top: 1%;
-	margin-bottom: 1%;
-	bottom: 50%;
+  display: block;
+  position: relative;
+  border-radius: 10px;
+  border-color: transparent;
+  box-shadow: 5px 8px #3a20751f;
+  height: 50px;
+  width: 100%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  bottom: 50%;
 }

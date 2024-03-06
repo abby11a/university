@@ -17,6 +17,7 @@
 
 # misc
 .DS_Store
+../.DS_Store
 *.pem
 
 # debug
@@ -27,6 +28,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
@@ -34,3 +36,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Cypress videos and screenshots
+cypress/screenshots/
+cypress/videos/
