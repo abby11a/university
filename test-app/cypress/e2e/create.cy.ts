@@ -15,7 +15,7 @@ describe('My Next.js App', () => {
 
     it('renders the form', () => {
         cy.contains("Create Device").should("be.visible");
-        cy.get('form').should('exist');
+        cy.get('Form').should('exist');
         cy.url().should('contain', '/create');
     })
 
