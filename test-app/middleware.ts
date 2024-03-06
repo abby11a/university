@@ -6,7 +6,7 @@ import { NextRequest } from 'next/server'
 const ratelimit = new Ratelimit({
   redis: kv,
   // 5 requests from the same IP in 10 seconds
-  limiter: Ratelimit.slidingWindow(5, '10 s'),
+  limiter: Ratelimit.slidingWindow(2, '10 s'),
 })
 
 // Define which routes you want to rate limit
@@ -23,5 +23,5 @@ export default async function middleware(request: NextRequest) {
 
   return success
     ? next()
-    : Response.redirect(new URL('/blocked.html', request.url))
+    : Response.redirect(new URL('/blocked', request.url))
 }
