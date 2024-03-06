@@ -51,12 +51,6 @@ Open the Cypress test interface
   > npm run cypress
 Run each test
 
-### Docker Deploy
-Re-seed/ build if needed.
-Run docker desktop.
-  > docker build -t inventory-manager .
-  > docker run -p 3000:3000 -e NEXTAUTH_SECRET='ewadxcg' -e NEXTAUTH_URL=http://localhost:3000 inventory-manager
-
 ## Methods used in the app
 ### Modular programming
 Each element is seperated into a component, this ensures reuasability of the code. By following modularisation, I can reuse components, like the [app Header](/src/components/Header.tsx), throughout my code.
@@ -157,7 +151,6 @@ This folder contains all the files concerning the database.
 - The CSS components for the app
 
 This code was built upon a NextJS fullstack app example, which shows how to implement a **fullstack app in TypeScript with [Next.js](https://nextjs.org/)** using [React](https://reactjs.org/) and [Prisma Client](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
-
 
 ## Using the REST API
 You can also access the REST API of the API server directly. It is running on the same host machine and port and can be accessed via the `/api` route (in this case that is `localhost:3000/api/`, so you can e.g. reach the API with [`localhost:3000/api/device`](http://localhost:3000/api/device)).
