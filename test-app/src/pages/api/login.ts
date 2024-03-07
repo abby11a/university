@@ -1,8 +1,23 @@
 import prisma from "@/lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from 'bcryptjs';
+import { Ratelimit } from '@upstash/ratelimit'
+import { kv } from '@vercel/kv'
+import { getClientIp } from "request-ip";
+
+const ratelimit = new Ratelimit({
+    redis: kv,
+    limiter: Ratelimit.slidingWindow(2, '10 s'),
+})
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    const clientIp = getClientIp(req) || "NA";
+    const { success } = await ratelimit.limit(clientIp);
+ 
+    if (!success) {
+        return res.status(429).send({ message: 'Rate succeeded' });
+    }
+
     try {
         if (req.method !== 'POST') {
             return res.status(405).send({ message: 'Only POST requests allowed' });

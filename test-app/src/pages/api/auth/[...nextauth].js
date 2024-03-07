@@ -41,11 +41,12 @@ export const authOptions = {
                         password
                     }),
                 });
-                const user = await res.json();
-                console.log(`RESULT: ${JSON.stringify(user)}`)
-                if (res.ok && user) {
-                    return user;
-                } else return null;
+                const result = await res.json();
+                if (res.ok && result) {
+                    return result;
+                } else {
+                    throw new Error(JSON.stringify(result));
+                }
             },
         })
     ],
