@@ -17,12 +17,12 @@ const Signin = () => {
 			redirect: false,
 		}).then((response) => {
 			if (response?.status != 200) {
-				console.log(JSON.stringify(response));
-				alert("Invalid email or password")
+				console.log(`from signin: ${JSON.stringify(response)}`);
+				alert(response?.error);
 			} else {
 				router.push("/");
 			}
-		})
+		});
 	};
 
 	return (
@@ -72,5 +72,6 @@ export async function getServerSideProps(context: { req: any }) {
 	const providers = await getProviders();
 	if (session) {
 		return { redirect: { destination: "/" } };
-	} return { props: { providers } };
+	}
+	return { props: { providers } };
 }
