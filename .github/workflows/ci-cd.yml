@@ -21,50 +21,42 @@ jobs:
     # Install dependencies
     - name: Install dependencies
       run: |
-        cd test-app
         npm install
 
     # Security Audit
     - name: Run npm audit
       run: |
-        cd test-app
         npm audit --production --audit-level=moderate
       continue-on-error: false
 
     # Generate Prisma client
     - name: Generate Prisma Client
       run: |
-        cd test-app
         npx prisma db seed
         npx prisma generate
 
     # Build the project
     - name: Build the project
       run: |
-        cd test-app
         npm run build
         
     # Run unit tests
     - name: Run Unit Tests
       run: |
-        cd test-app
         npm test
 
     # Run E2E tests
     - name: Start the application
       run: |
-        cd test-app
         npm run dev &
     - name: Wait for the server to be ready
       run: |
-        cd test-app
         until $(curl --output /dev/null --silent --head --fail http://localhost:3000); do
           printf '.'
           sleep 1
         done
     - name: Run Cypress E2E Tests
       run: |
-        cd test-app
         npm run test:e2e
 
   # Deploy the stack to Vercel
