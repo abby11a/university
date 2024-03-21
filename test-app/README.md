@@ -47,7 +47,7 @@ Runs the unit tests on the components
 Run app locally if not already running
   > npm run dev
 
-Open the Cypress test interface
+Alternatively, open the Cypress test interface
   > npm run cypress
 Run each test
 
@@ -63,10 +63,6 @@ I used git to version control the changes to this app, the commits can be found 
 During the process I prioritised working increments in each commit. I then would revisit the code to refactor and improve it, for instance changing naming conventions, removing unused components, adding tests.
 
 This follows Agile's principles of: early and continuous delivery of working software, and continuous attention to technical excellence.
-
-### Usability
-I created wireframes for the UX design of the app.
-I ensured to create simple navigation to allow the user to navigate the app easily.
 
 ### Data Validation
 By using typescript, it ensures that entered data is the correct type.

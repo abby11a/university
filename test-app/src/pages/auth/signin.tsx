@@ -17,8 +17,13 @@ const Signin = () => {
 			redirect: false,
 		}).then((response) => {
 			if (response?.status != 200) {
-				console.log(`from signin: ${JSON.stringify(response)}`);
-				alert(response?.error);
+				const errorObj = JSON.parse(response?.error ?? "");
+				if (errorObj && typeof errorObj.message === "string"){
+					alert(errorObj.message)
+				} else {
+					alert("There is a problem signing in")
+					console.log(response)
+				}
 			} else {
 				router.push("/");
 			}

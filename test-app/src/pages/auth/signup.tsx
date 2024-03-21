@@ -13,11 +13,11 @@ const SignUp: React.FC = () => {
 		e.preventDefault();
 		try {
 			const user = { name, email, password };
-      await fetch(`/api/user`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      });
+			await fetch(`/api/user`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(user),
+			});
 			await Router.push("/");
 		} catch (error) {
 			console.error(error);
@@ -52,18 +52,20 @@ const SignUp: React.FC = () => {
 						/>
 					</label>
 					<label className={styles.input}>
-						Password
+						Password <small>(8 characters minimum)</small>
 						<input
 							id="password"
 							onChange={(e) => setPassword(e.target.value)}
 							placeholder="Password"
 							type="password"
 							value={password}
+							required
+							minLength={8}
 						/>
 					</label>
 					<button
 						className={styles.button}
-						disabled={!name || !email || !password}
+						disabled={!name || !email || password.length < 8}
 						type="submit"
 						value="Signup"
 					>
