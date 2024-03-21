@@ -66,6 +66,11 @@ jobs:
       run: |
         cd test-app
         npm run test:e2e
+      env:
+        POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
+        KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
+        KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
+        NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
 
   # Deploy the stack to Vercel
   deploy:
