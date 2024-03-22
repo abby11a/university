@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, getByRole, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Header } from "@/components/Header";
 import client, { signOut } from "next-auth/react";
 import { Session } from "next-auth";
@@ -21,7 +21,6 @@ jest.mock('next-auth/react', () => ({
 
 // Tests components/Header file
 describe("Header", () => {
-
 	beforeEach(() => {
 		const mockSession: Session = {
 			expires: "1",
